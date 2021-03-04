@@ -42,7 +42,7 @@ function Home(props) {
         <div className="title">
           인공지능 <span style={{ color: "yellow" }}>동글</span>
         </div>
-        <Link to="/learn/1">
+        <Link to="/learn1">
           <Button style={{ margin: "3.5rem auto" }}>체험 시작하기</Button>
         </Link>
         <div className="collabo">

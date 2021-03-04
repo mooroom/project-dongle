@@ -4,13 +4,13 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 
 import Home from "./pages/Home";
-import Learn from "./pages/Learn";
+import Learn1 from "./pages/Learn1";
 
 function App() {
   return (
     <Router>
       <Route exact path="/" component={Home} />
-      <Route path="/learn/:num" component={Learn} />
+      <Route path="/learn1" component={Learn1} />
     </Router>
   );
 }
