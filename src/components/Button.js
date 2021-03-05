@@ -6,18 +6,26 @@ const StyledButton = styled.button`
   /* 공통 스타일 */
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   outline: none;
   border: none;
   border-radius: 50px;
   color: white;
   cursor: pointer;
-  padding: 2rem 3rem;
+  padding: 1rem 3rem;
 
-  /* 크기 */
-  height: 2.25rem;
-  font-size: 1.5rem;
 
-  /* 색상 */
+  font-size: 1.3rem;
+  font-weight: bold;
+
+  ${(props) => {
+    const width = props.width;
+    return css`
+      width: ${width};
+    `
+  }}
+
+
   ${(props) => {
     const color = props.color;
     return css`
@@ -31,7 +39,6 @@ const StyledButton = styled.button`
     `;
   }}
 
-  /* 기타 */
   & + & {
     margin-left: 1rem;
   }

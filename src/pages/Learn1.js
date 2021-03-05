@@ -15,7 +15,7 @@ function Learn1() {
     <>
       <Body />
       <Navbar />
-      <Guide />
+      <Guide type="learn"/>
     </>
   );
 }
