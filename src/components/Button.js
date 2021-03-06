@@ -13,18 +13,33 @@ const StyledButton = styled.button`
   color: white;
   cursor: pointer;
   padding: 1rem 3rem;
-
-
-  font-size: 1.3rem;
+  transition: all 0.5s ease-in;
+  font-size: 1rem;
   font-weight: bold;
+
+  ${(props) => {
+    const reactive = props.reactive;
+    const activate = props.activate;
+
+    if (reactive && !activate) {
+      return css`
+        opacity: 0.25;
+      `;
+    }
+
+    if (activate) {
+      return css`
+        opacity: 1;
+      `;
+    }
+  }}
 
   ${(props) => {
     const width = props.width;
     return css`
       width: ${width};
-    `
+    `;
   }}
-
 
   ${(props) => {
     const color = props.color;
@@ -44,8 +59,12 @@ const StyledButton = styled.button`
   }
 `;
 
-function Button({ children, ...rest }) {
-  return <StyledButton {...rest}>{children}</StyledButton>;
+function Button({ children, onClick, ...rest }) {
+  return (
+    <StyledButton {...rest} onClick={onClick}>
+      {children}
+    </StyledButton>
+  );
 }
 
 Button.defaultProps = {

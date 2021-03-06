@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { ReactComponent as HomeIcon } from "../asset/img/icon_home.svg";
@@ -47,12 +48,11 @@ const NavBlock = styled.div`
 function Navbar({ text, ...rest }) {
   return (
     <NavBlock {...rest}>
-      <div className="icon-container">
-        <HomeIcon fill="#55119e" />
-      </div>
-      <div className="icon-container">
-        <HomeIcon fill="#55119e" />
-      </div>
+      <Link to="/">
+        <div className="icon-container">
+          <HomeIcon fill="#55119e" />
+        </div>
+      </Link>
       <div className="title">{text}</div>
     </NavBlock>
   );
