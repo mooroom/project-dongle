@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { ReactComponent as HomeIcon } from "../asset/img/icon_home.svg";
+import { ReactComponent as SoundIcon } from "../asset/img/icon_sound.svg";
 
 const NavBlock = styled.div`
   position: fixed;
@@ -18,6 +19,10 @@ const NavBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+
+  a {
+    width: initial;
+  }
 
   .icon-container {
     width: 40px;
@@ -43,9 +48,30 @@ const NavBlock = styled.div`
     color: white;
     font-weight: bold;
   }
+
+  .sound {
+    background: white;
+    animation-name: alive;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes alive {
+    0% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    100% {
+      opacity: 0.8;
+    }
+  }
 `;
 
-function Navbar({ text, ...rest }) {
+function Navbar({ text, audioPlaying, ...rest }) {
   return (
     <NavBlock {...rest}>
       <Link to="/">
@@ -53,6 +79,11 @@ function Navbar({ text, ...rest }) {
           <HomeIcon fill="#55119e" />
         </div>
       </Link>
+      {audioPlaying && (
+        <div className="icon-container sound">
+          <SoundIcon fill="#55119e" />
+        </div>
+      )}
       <div className="title">{text}</div>
     </NavBlock>
   );
