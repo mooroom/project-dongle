@@ -11,6 +11,7 @@ import heli_leg3 from "../asset/img/heli_leg3.png";
 import heli_arm1 from "../asset/img/heli_arm1.png";
 import heli_arm2 from "../asset/img/heli_arm2.png";
 import heli_arm3 from "../asset/img/heli_arm3.png";
+import dongle_thinking from "../asset/img/dongle_thinking2.png";
 
 import icon_1 from "../asset/img/icon_1.png";
 import icon_2 from "../asset/img/icon_2.png";
@@ -26,6 +27,7 @@ const GuideBlock = styled.div`
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   transition: all 0.5s ease-in;
+  z-index: 98;
 
   .txt-con {
     word-break: keep-all;
@@ -110,6 +112,7 @@ const types = {
     [icon_o, "좋아!", heli_leg2],
     [icon_x, "너무 멀어", heli_leg3],
   ],
+  test: dongle_thinking,
 };
 
 function Guide({ type, hide }) {
@@ -131,18 +134,26 @@ function Guide({ type, hide }) {
   } else if (type === "leg") {
     guideText = "다리 사진 8장을 찍어서 모아줘! 다리만 잘 나오도록 찍어줘야해~";
     guideType = types.leg;
+  } else if (type === "test") {
+    guideText =
+      "이제 동글이를 테스트해보자! 카메라를 통해 동글이에게 얼굴, 팔, 다리 중 하나를 물어보면 동글이가 맞춰볼꺼야!";
+    guideType = types.test;
   }
 
   return (
     <GuideBlock hide={hide}>
       <div className="txt-con">{guideText}</div>
-      {guideType.map((content, index) => (
-        <GuideImg key={index}>
-          <img className="tag" src={content[0]} alt="tag" />
-          <div className="left">{content[1]}</div>
-          <img className="right" src={content[2]} alt="right" />
-        </GuideImg>
-      ))}
+      {type === "test" ? (
+        <img src={guideType} alt="img" style={{ width: "100%" }} />
+      ) : (
+        guideType.map((content, index) => (
+          <GuideImg key={index}>
+            <img className="tag" src={content[0]} alt="tag" />
+            <div className="left">{content[1]}</div>
+            <img className="right" src={content[2]} alt="right" />
+          </GuideImg>
+        ))
+      )}
     </GuideBlock>
   );
 }

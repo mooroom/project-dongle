@@ -8,6 +8,7 @@ import BottomBox from "./BottomBox";
 import Button from "./Button";
 
 // images
+import dongle_face from "../asset/img/dongle_face.gif";
 import dongle_arm from "../asset/img/dongle_arm.gif";
 import dongle_leg from "../asset/img/dongle_leg.gif";
 
@@ -86,10 +87,28 @@ const LoaderObj = styled.div`
   }
 `;
 
-function Loader({ visible, onCancel }) {
+function Loader({ visible, onCancel, step }) {
   const [animate, setAnimate] = useState(false);
   const [localVisible, setLocalVisible] = useState(visible);
   const [loading, setLoading] = useState(true);
+
+  const [dongle, setDongle] = useState(dongle_face);
+  const [dongleText, setDongleText] = useState("얼굴을 만들었어요!");
+
+  useEffect(() => {
+    switch (step) {
+      case "arm":
+        setDongle(dongle_arm);
+        setDongleText("팔을 만들었어요!");
+        break;
+      case "leg":
+        setDongle(dongle_leg);
+        setDongleText("다리를 만들었어요!");
+        break;
+      default:
+        setDongle(dongle_face);
+    }
+  }, [step]);
 
   useEffect(() => {
     if (localVisible && visible) {
@@ -111,7 +130,8 @@ function Loader({ visible, onCancel }) {
   return (
     <>
       <LoaderBlock disappear={!visible}>
-        {!loading && <img src={dongle_leg} alt="gif" />}
+        {!loading && <div className="text">{dongleText}</div>}
+        {!loading && <img src={dongle} alt="gif" />}
         {loading && <LoaderObj />}
       </LoaderBlock>
       {!loading && (

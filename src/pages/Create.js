@@ -11,11 +11,14 @@ import Alert from "../components/Alert";
 import Guide from "../components/Guide";
 import BottomBox from "../components/BottomBox";
 import Loader from "../components/Loader";
+import Classifier from "../components/Classifier";
+import Camera from "../components/Camera";
 
 // sounds
 import audio_face from "../asset/sound/audio3_face.m4a";
 import audio_arm from "../asset/sound/audio4_arm.m4a";
 import audio_leg from "../asset/sound/audio5_leg.m4a";
+import audio_test from "../asset/sound/audio6_test.m4a";
 
 function Create(props) {
   const [mode, setMode] = useState("guide");
@@ -23,8 +26,9 @@ function Create(props) {
   const [showAlert, setShowAlert] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [last, setLast] = useState(false);
 
-  const count = useRef(0);
+  const count = useRef(1);
 
   // audio1
   const audio1 = new Audio(audio_face);
@@ -37,7 +41,6 @@ function Create(props) {
     setPlaying(false);
     setEnd1(true);
     setMode("photo");
-    setStep("arm");
   });
   // audio2
   const audio2 = new Audio(audio_arm);
@@ -50,7 +53,6 @@ function Create(props) {
     setPlaying(false);
     setEnd2(true);
     setMode("photo");
-    setStep("leg");
   });
   // audio3
   const audio3 = new Audio(audio_leg);
@@ -63,6 +65,19 @@ function Create(props) {
     setPlaying(false);
     setEnd3(true);
     setMode("photo");
+  });
+  // audio3
+  const audio4 = new Audio(audio_test);
+  const [ended4, setEnd4] = useState(false);
+  const onPlay4 = () => {
+    setPlaying(true);
+    audio4.play();
+  };
+  audio4.addEventListener("ended", () => {
+    setPlaying(false);
+    setEnd4(true);
+    setMode("test");
+    setLast(true);
   });
 
   //
@@ -92,44 +107,57 @@ function Create(props) {
           setShowAlert(true);
           setTimeout(() => setShowAlert(false), 500);
         }
+      } else if (step === "test") {
+        if (!playing && !ended4) {
+          onPlay4();
+        }
+        if (playing && !ended4) {
+          setShowAlert(true);
+          setTimeout(() => setShowAlert(false), 500);
+        }
       }
     } else if (mode === "photo") {
-      count.current += 1;
-      if (count.current === 8) {
+      if (count.current % 8 === 0) {
         count.current = 0;
         setTimeout(() => {
           setLoader(true);
         }, 250);
       }
+      count.current += 1;
     }
   };
   const onCancel = () => {
     setMode("guide");
     setLoader(false);
-    if (ended3) {
-      window.location.href = "/test";
+    if (step === "face") {
+      setStep("arm");
+    } else if (step === "arm") {
+      setStep("leg");
+    } else if (step === "leg") {
+      setStep("test");
     }
   };
   return (
     <div>
-      <Loader visible={loader} onCancel={onCancel} />
-
+      <Camera />
+      <Loader visible={loader} onCancel={onCancel} step={step} />
       <Navbar text="동글이 키우는 법" audioPlaying={playing} />
       {mode === "guide" && (
         <Container flex top="90px" bottom="110px">
           <Guide type={step} />
         </Container>
       )}
-      <BottomBox>
+      <BottomBox animate disappear={last}>
         <Button
           width="100%"
           onClick={clickHandler}
           color={mode === "photo" ? "#8D60BE" : "#55119E"}
         >
-          {mode === "photo" ? count.current : "준비하기"}
+          {mode === "photo" ? "찰칵" : "준비하기"}
         </Button>
       </BottomBox>
       <Alert show={showAlert} />
+      <Classifier visible={last} />
     </div>
   );
 }
