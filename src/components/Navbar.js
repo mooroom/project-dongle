@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 import { ReactComponent as HomeIcon } from "../asset/img/icon_home.svg";
 import { ReactComponent as SoundIcon } from "../asset/img/icon_sound.svg";

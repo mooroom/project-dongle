@@ -13,11 +13,14 @@ import BottomBox from "../components/BottomBox";
 
 function Learn2(props) {
   const [end, setEnd] = useState(false);
+
+  const linkHandler = () => end && "/prepare";
+
   return (
     <>
       <BodyBackground color="black" />
       <Navbar color="transparent" />
-      <Container flex>
+      <Container flex height="100vh">
         <ReactPlayer
           url="https://www.youtube.com/embed/h0Ls3unm-nA"
           width="100%"
@@ -29,7 +32,7 @@ function Learn2(props) {
       </Container>
 
       <BottomBox>
-        <Link to={end && "/prepare"}>
+        <Link to={linkHandler}>
           <Button width="100%" reactive activate={end}>
             다음으로 넘어가기
           </Button>

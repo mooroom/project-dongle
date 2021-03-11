@@ -16,7 +16,7 @@ import Alert from "../components/Alert";
 import dongle from "../asset/img/dongle_baby.png";
 
 // sounds
-import audio from "../asset/sound/prepare_1.m4a";
+import audio from "../asset/sound/audio1.m4a";
 
 // hooks
 import { useAudio } from "../hooks/useAudio";
@@ -58,17 +58,13 @@ function Prepare(props) {
     }
   };
 
-  const linkHander = () => {
-    if (ended) {
-      return "/";
-    }
-  };
+  const linkHander = () => ended && "/create";
 
   return (
     <div style={{ color: "white" }}>
       <BodyBackground color="#8C63BC" />
       <Navbar color="transparent" audioPlaying={playing} />
-      <Container flex>
+      <Container flex height="100vh">
         <h2>인공지능 동글이 키우기</h2>
         <ImageClip isPlaying={playing}>
           <img src={dongle} alt="dongle" />

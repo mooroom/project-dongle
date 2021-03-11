@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export const useAudio = (url) => {
   const [audio] = useState(new Audio(url));
@@ -6,6 +6,7 @@ export const useAudio = (url) => {
   const [ended, setEnd] = useState(false);
 
   const onPlay = () => {
+    console.log(audio);
     setPlaying(true);
     audio.play();
   };

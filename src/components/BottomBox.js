@@ -1,7 +1,17 @@
 import React from "react";
 
 // packages
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+
+const fadeIn = keyframes`
+    from {opacity: 0;}
+    to {opacity: 1;}
+`;
+
+const fadeOut = keyframes`
+    from {opacity: 1;}
+    to {opacity: 0;}
+`;
 
 const BottomBoxBlock = styled.div`
   display: flex;
@@ -14,6 +24,29 @@ const BottomBoxBlock = styled.div`
   position: fixed;
   left: 0;
   bottom: 0;
+
+  ${(props) =>
+    props.zIndex &&
+    css`
+      z-index: ${props.zIndex};
+    `}
+
+  ${(props) =>
+    props.animate &&
+    css`
+      animation-duration: 0.5s;
+      animation-timing-function: ease-out;
+      animation-fill-mode: forwards;
+    `}
+
+    ${({ disappear }) =>
+    disappear
+      ? css`
+          animation-name: ${fadeOut};
+        `
+      : css`
+          animation-name: ${fadeIn};
+        `}
 `;
 
 function BottomBox({ children, ...rest }) {

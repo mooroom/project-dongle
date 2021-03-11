@@ -1,10 +1,17 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-import Button from "../components/Button";
+// images
+import heli_face1 from "../asset/img/heli_face1.png";
+import heli_face2 from "../asset/img/heli_face2.png";
+import heli_face3 from "../asset/img/heli_face3.png";
+import heli_leg1 from "../asset/img/heli_leg1.png";
+import heli_leg2 from "../asset/img/heli_leg2.png";
+import heli_leg3 from "../asset/img/heli_leg3.png";
+import heli_arm1 from "../asset/img/heli_arm1.png";
+import heli_arm2 from "../asset/img/heli_arm2.png";
+import heli_arm3 from "../asset/img/heli_arm3.png";
 
-import dummy from "../asset/img/image_rect.png";
-import dongle from "../asset/img/dongle_head.png";
 import icon_1 from "../asset/img/icon_1.png";
 import icon_2 from "../asset/img/icon_2.png";
 import icon_3 from "../asset/img/icon_3.png";
@@ -12,37 +19,40 @@ import icon_o from "../asset/img/icon_o.png";
 import icon_x from "../asset/img/icon_x.png";
 
 const GuideBlock = styled.div`
-  padding: 0 30px;
-  width: 100vw;
-  height: 100vh;
-  padding-top: 70px;
-  box-sizing: border-box;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  .dongle-head {
-    display: block;
-    width: 100px;
-  }
-`;
-
-const Card = styled.div`
+  width: 100%;
   padding: 20px 40px;
   background-color: white;
   border-radius: 40px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  transition: all 0.5s ease-in;
 
   .txt-con {
     word-break: keep-all;
     margin-top: 1rem;
     margin-bottom: 1.5rem;
+    text-align: center;
   }
+
+  ${(props) => {
+    const hide = props.hide;
+
+    if (hide) {
+      console.log(`hide: ${hide}`);
+      return css`
+        opacity: 0;
+        visibility: hidden;
+      `;
+    } else {
+      return css`
+        opacity: 1;
+        visibility: visible;
+      `;
+    }
+  }}
 `;
 
-const CardImg = styled.div`
+const GuideImg = styled.div`
   position: relative;
   width: 100%;
   display: flex;
@@ -81,28 +91,28 @@ const CardImg = styled.div`
 
 const types = {
   learn: [
-    [icon_1, "얼굴을 찍어줘", dongle],
-    [icon_2, "팔을 찍어줘", dongle],
-    [icon_3, "다리를 찍어줘", dongle],
+    [icon_1, "얼굴을 찍어줘", heli_face2],
+    [icon_2, "팔을 찍어줘", heli_arm2],
+    [icon_3, "다리를 찍어줘", heli_leg2],
   ],
   arm: [
-    [icon_x, "너무 가까워", dongle],
-    [icon_o, "좋아!", dongle],
-    [icon_x, "너무 멀어", dongle],
+    [icon_x, "너무 가까워", heli_arm1],
+    [icon_o, "좋아!", heli_arm2],
+    [icon_x, "너무 멀어", heli_arm3],
   ],
   face: [
-    [icon_x, "너무 가까워", dongle],
-    [icon_o, "좋아!", dongle],
-    [icon_x, "너무 멀어", dongle],
+    [icon_x, "너무 가까워", heli_face1],
+    [icon_o, "좋아!", heli_face2],
+    [icon_x, "너무 멀어", heli_face3],
   ],
   leg: [
-    [icon_x, "너무 가까워", dongle],
-    [icon_o, "좋아!", dongle],
-    [icon_x, "너무 멀어", dongle],
+    [icon_x, "너무 가까워", heli_leg1],
+    [icon_o, "좋아!", heli_leg2],
+    [icon_x, "너무 멀어", heli_leg3],
   ],
 };
 
-function Guide({ type }) {
+function Guide({ type, hide }) {
   let guideText;
   let guideType;
 
@@ -124,18 +134,15 @@ function Guide({ type }) {
   }
 
   return (
-    <GuideBlock>
-      <Card>
-        <div className="txt-con">{guideText}</div>
-        {guideType.map((content) => (
-          <CardImg>
-            <img className="tag" src={content[0]} alt="tag" />
-            <div className="left">{content[1]}</div>
-            <img className="right" src={content[2]} alt="right" />
-          </CardImg>
-        ))}
-        <Button width="100%">준비하기</Button>
-      </Card>
+    <GuideBlock hide={hide}>
+      <div className="txt-con">{guideText}</div>
+      {guideType.map((content, index) => (
+        <GuideImg key={index}>
+          <img className="tag" src={content[0]} alt="tag" />
+          <div className="left">{content[1]}</div>
+          <img className="right" src={content[2]} alt="right" />
+        </GuideImg>
+      ))}
     </GuideBlock>
   );
 }

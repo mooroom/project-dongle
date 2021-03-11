@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled, { createGlobalStyle } from "styled-components";
 
 // images
 import background from "../asset/img/background.png";
@@ -8,7 +7,6 @@ import background from "../asset/img/background.png";
 // componente
 import Button from "../components/Button";
 import BodyBackground from "../components/BodyBackground";
-import Container from "../components/Container";
 import BottomBox from "../components/BottomBox";
 
 function Home(props) {
