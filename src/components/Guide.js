@@ -78,7 +78,6 @@ const GuideImg = styled.div`
   }
   .right {
     width: 65%;
-    height: auto;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
   }
@@ -150,7 +149,9 @@ function Guide({ type, hide }) {
           <GuideImg key={index}>
             <img className="tag" src={content[0]} alt="tag" />
             <div className="left">{content[1]}</div>
-            <img className="right" src={content[2]} alt="right" />
+            <div className="right">
+              <img src={content[2]} style={{ width: "100%" }} alt="right" />
+            </div>
           </GuideImg>
         ))
       )}
