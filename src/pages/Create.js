@@ -28,7 +28,8 @@ function Create(props) {
   const [loader, setLoader] = useState(false);
   const [last, setLast] = useState(false);
 
-  const count = useRef(1);
+  // const count = useRef(1);
+  const [count, setCount] = useState(0);
 
   // audio1
   const audio1 = new Audio(audio_face);
@@ -117,13 +118,12 @@ function Create(props) {
         }
       }
     } else if (mode === "photo") {
-      if (count.current % 8 === 0) {
-        count.current = 0;
-        setTimeout(() => {
-          setLoader(true);
-        }, 250);
+      setCount(count => count + 1);
+      if (count == 7) {
+        setCount(0)
+        setLoader(true);
       }
-      count.current += 1;
+      
     }
   };
   const onCancel = () => {
@@ -138,15 +138,19 @@ function Create(props) {
     }
   };
   return (
-    <div>
+    <Container flex height="100vh">
       <Camera />
       <Loader visible={loader} onCancel={onCancel} step={step} />
-      <Navbar text="동글이 키우는 법" audioPlaying={playing} />
+      <Navbar text="동글이 키우는 법" audioPlaying={playing} timerPlaying={last}/>
       {mode === "guide" && (
-        <Container flex top="90px" bottom="110px">
           <Guide type={step} />
-        </Container>
       )}
+      {
+        mode === "photo" && (
+            <div style={{color: "white", fontSize:"1.5rem"}}>{`${8 - count}장 더!`}</div>
+        )
+      }
+      
       <BottomBox animate disappear={last}>
         <Button
           width="100%"
@@ -158,7 +162,7 @@ function Create(props) {
       </BottomBox>
       <Alert show={showAlert} />
       <Classifier visible={last} />
-    </div>
+    </Container>
   );
 }
 

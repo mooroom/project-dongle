@@ -6,6 +6,8 @@ import styled, { css } from "styled-components";
 const ContainerBlock = styled.div`
   padding-left: 50px;
   padding-right: 50px;
+  width: 100%;
+  box-sizing: border-box;
 
   ${(props) =>
     props.flex &&

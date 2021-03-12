@@ -5,8 +5,11 @@ import styled from "styled-components";
 import { ReactComponent as HomeIcon } from "../asset/img/icon_home.svg";
 import { ReactComponent as SoundIcon } from "../asset/img/icon_sound.svg";
 
+import Timer from '../components/Timer'
+
 const NavBlock = styled.div`
   position: fixed;
+  z-index: 100;
   width: 100%;
   top: 0;
   left: 0;
@@ -57,6 +60,13 @@ const NavBlock = styled.div`
     animation-iteration-count: infinite;
   }
 
+  .timer {
+    background: white;
+    font-weight: bold;
+    color: black;
+    align-self: flex-end;
+  }
+
   @keyframes alive {
     0% {
       opacity: 0.8;
@@ -71,7 +81,7 @@ const NavBlock = styled.div`
   }
 `;
 
-function Navbar({ text, audioPlaying, ...rest }) {
+function Navbar({ text, audioPlaying, timerPlaying, ...rest }) {
   return (
     <NavBlock {...rest}>
       <Link to="/">
@@ -82,6 +92,11 @@ function Navbar({ text, audioPlaying, ...rest }) {
       {audioPlaying && (
         <div className="icon-container sound">
           <SoundIcon fill="#55119e" />
+        </div>
+      )}
+      {timerPlaying && (
+        <div className="icon-container timer">
+          <Timer start={timerPlaying}/>
         </div>
       )}
       <div className="title">{text}</div>

@@ -27,7 +27,6 @@ const GuideBlock = styled.div`
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   transition: all 0.5s ease-in;
-  z-index: 98;
 
   .txt-con {
     word-break: keep-all;
@@ -78,8 +77,15 @@ const GuideImg = styled.div`
   }
   .right {
     width: 65%;
-    border-top-right-radius: 40px;
-    border-bottom-right-radius: 40px;
+    display: flex;
+
+    img {
+      width: 100%;
+      align-self: flex-start;
+      object-fit: contain;
+      border-top-right-radius: 40px;
+      border-bottom-right-radius: 40px;
+    }
   }
   & + & {
     margin-top: 1rem;
@@ -150,7 +156,7 @@ function Guide({ type, hide }) {
             <img className="tag" src={content[0]} alt="tag" />
             <div className="left">{content[1]}</div>
             <div className="right">
-              <img src={content[2]} style={{ width: "100%" }} alt="right" />
+              <img src={content[2]} alt="right" />
             </div>
           </GuideImg>
         ))
