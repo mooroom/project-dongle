@@ -11,6 +11,8 @@ import Button from "./Button";
 import dongle_face from "../asset/img/dongle_face.gif";
 import dongle_arm from "../asset/img/dongle_arm.gif";
 import dongle_leg from "../asset/img/dongle_leg.gif";
+import guide_arm from "../asset/img/guide_arm.png";
+import guide_leg from "../asset/img/guide_leg.png";
 
 const fadeIn = keyframes`
     from {opacity: 0;}
@@ -87,7 +89,7 @@ const LoaderObj = styled.div`
   }
 `;
 
-function Loader({ visible, onCancel, step }) {
+function Loader({ visible, onCancel, step, setMode }) {
   const [animate, setAnimate] = useState(false);
   const [localVisible, setLocalVisible] = useState(visible);
   const [loading, setLoading] = useState(true);
@@ -97,11 +99,11 @@ function Loader({ visible, onCancel, step }) {
 
   useEffect(() => {
     switch (step) {
-      case "arm":
+      case guide_arm:
         setDongle(dongle_arm);
         setDongleText("팔을 만들었어요!");
         break;
-      case "leg":
+      case guide_leg:
         setDongle(dongle_leg);
         setDongleText("다리를 만들었어요!");
         break;
@@ -124,6 +126,7 @@ function Loader({ visible, onCancel, step }) {
   const onClick = () => {
     onCancel();
     setLoading(true);
+    setMode("guide");
   };
 
   if (!animate && !localVisible) return null;

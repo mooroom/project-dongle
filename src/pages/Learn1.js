@@ -16,7 +16,7 @@ function Learn1() {
   return (
     <>
       <Navbar color="transparent" />
-      <Container top="70px" bottom="110px">
+      <Container top="70px">
         <img
           src={learn_info}
           alt="learn_info"
@@ -32,12 +32,12 @@ function Learn1() {
           다리를 알려줘야 해요. 스마트폰과 전용 포스터를 이용해서 동글이에게
           알려주세요!
         </p>
+        <BottomBox nonfix>
+          <Link to="/learn2">
+            <Button width="100%">다음으로 넘어가기</Button>
+          </Link>
+        </BottomBox>
       </Container>
-      <BottomBox>
-        <Link to="/learn2">
-          <Button width="100%">다음으로 넘어가기</Button>
-        </Link>
-      </BottomBox>
     </>
   );
 }

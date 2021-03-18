@@ -8,11 +8,11 @@ import Navbar from "../components/Navbar";
 import Button from "../components/Button";
 import Container from "../components/Container";
 import Alert from "../components/Alert";
-import Guide from "../components/Guide";
 import BottomBox from "../components/BottomBox";
 import Loader from "../components/Loader";
 import Classifier from "../components/Classifier";
 import Camera from "../components/Camera";
+import Counter from "../components/Counter";
 
 // sounds
 import audio_face from "../asset/sound/audio3_face.m4a";
@@ -20,9 +20,15 @@ import audio_arm from "../asset/sound/audio4_arm.m4a";
 import audio_leg from "../asset/sound/audio5_leg.m4a";
 import audio_test from "../asset/sound/audio6_test.m4a";
 
+// images
+import guide_face from "../asset/img/guide_face.png";
+import guide_arm from "../asset/img/guide_arm.png";
+import guide_leg from "../asset/img/guide_leg.png";
+import guide_test from "../asset/img/guide_test.png";
+
 function Create(props) {
   const [mode, setMode] = useState("guide");
-  const [step, setStep] = useState("face");
+  const [step, setStep] = useState(guide_face);
   const [showAlert, setShowAlert] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [loader, setLoader] = useState(false);
@@ -84,7 +90,7 @@ function Create(props) {
   //
   const clickHandler = () => {
     if (mode === "guide") {
-      if (step === "face") {
+      if (step === guide_face) {
         if (!playing && !ended1) {
           onPlay1();
         }
@@ -92,7 +98,7 @@ function Create(props) {
           setShowAlert(true);
           setTimeout(() => setShowAlert(false), 500);
         }
-      } else if (step === "arm") {
+      } else if (step === guide_arm) {
         if (!playing && !ended2) {
           onPlay2();
         }
@@ -100,7 +106,7 @@ function Create(props) {
           setShowAlert(true);
           setTimeout(() => setShowAlert(false), 500);
         }
-      } else if (step === "leg") {
+      } else if (step === guide_leg) {
         if (!playing && !ended3) {
           onPlay3();
         }
@@ -108,7 +114,7 @@ function Create(props) {
           setShowAlert(true);
           setTimeout(() => setShowAlert(false), 500);
         }
-      } else if (step === "test") {
+      } else if (step === guide_test) {
         if (!playing && !ended4) {
           onPlay4();
         }
@@ -118,39 +124,43 @@ function Create(props) {
         }
       }
     } else if (mode === "photo") {
-      setCount(count => count + 1);
-      if (count == 7) {
-        setCount(0)
+      setCount((count) => count + 1);
+      if (count === 7) {
+        setCount(0);
         setLoader(true);
       }
-      
     }
   };
   const onCancel = () => {
-    setMode("guide");
     setLoader(false);
-    if (step === "face") {
-      setStep("arm");
-    } else if (step === "arm") {
-      setStep("leg");
-    } else if (step === "leg") {
-      setStep("test");
+    if (step === guide_face) {
+      setStep(guide_arm);
+    } else if (step === guide_arm) {
+      setStep(guide_leg);
+    } else if (step === guide_leg) {
+      setStep(guide_test);
     }
   };
   return (
     <Container flex height="100vh">
       <Camera />
-      <Loader visible={loader} onCancel={onCancel} step={step} />
-      <Navbar text="동글이 키우는 법" audioPlaying={playing} timerPlaying={last}/>
+      <Loader
+        visible={loader}
+        onCancel={onCancel}
+        step={step}
+        setMode={setMode}
+      />
+      <Navbar
+        text="동글이 키우는 법"
+        audioPlaying={playing}
+        timerPlaying={last}
+      />
       {mode === "guide" && (
-          <Guide type={step} />
+        // <Guide type={step} />
+        <img src={step} style={{ width: "100%" }} alt="img" />
       )}
-      {
-        mode === "photo" && (
-            <div style={{color: "white", fontSize:"1.5rem"}}>{`${8 - count}장 더!`}</div>
-        )
-      }
-      
+      {mode === "photo" && <Counter count={count} mode={mode} />}
+
       <BottomBox animate disappear={last}>
         <Button
           width="100%"

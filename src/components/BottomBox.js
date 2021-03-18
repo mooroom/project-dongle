@@ -26,6 +26,13 @@ const BottomBoxBlock = styled.div`
   bottom: 0;
 
   ${(props) =>
+    props.nonfix &&
+    css`
+      position: relative;
+      padding: 30px 0px;
+    `}
+
+  ${(props) =>
     props.zIndex &&
     css`
       z-index: ${props.zIndex};

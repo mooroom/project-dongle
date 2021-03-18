@@ -9,6 +9,8 @@ import Learn2 from "./pages/Learn2";
 import Prepare from "./pages/Prepare";
 import Create from "./pages/Create";
 import Test from "./pages/Test";
+import Learn3 from "./pages/Learn3";
+import Fin from "./pages/Fin";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
       <Route path="/prepare" component={Prepare} />
       <Route path="/create" component={Create} />
       <Route path="/test" component={Test} />
+      <Route path="/learn3" component={Learn3} />
+      <Route path="/fin" component={Fin} />
     </Router>
   );
 }
