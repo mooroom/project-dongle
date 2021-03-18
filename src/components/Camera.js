@@ -18,7 +18,7 @@ const CameraBlock = styled.div`
 
 function Camera(props) {
   navigator.mediaDevices
-    .getUserMedia({ video: true })
+    .getUserMedia({ video: { facingMode: { exact: true } } })
     .then((stream) => {
       let video = document.getElementsByClassName("videoFeed")[0];
       if (video) {
