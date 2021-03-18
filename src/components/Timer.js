@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router";
 
 function Timer({ start }) {
-  const [seconds, setSeconds] = useState(15);
+  const [seconds, setSeconds] = useState(10);
+  const [fin, setFin] = useState(false);
 
   useEffect(() => {
     if (start) {
@@ -10,7 +12,7 @@ function Timer({ start }) {
           setSeconds((seconds) => seconds - 1);
         } else {
           clearInterval(countdown);
-          window.location.href = "learn3";
+          setFin(true);
         }
       }, 1000);
       return () => clearInterval(countdown);
@@ -18,15 +20,18 @@ function Timer({ start }) {
   }, [seconds, start]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {seconds}
-    </div>
+    <>
+      {fin && <Redirect to="learn3" />}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {seconds}
+      </div>
+    </>
   );
 }
 
