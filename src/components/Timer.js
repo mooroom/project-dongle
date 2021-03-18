@@ -10,7 +10,7 @@ function Timer({ start }) {
           setSeconds((seconds) => seconds - 1);
         } else {
           clearInterval(countdown);
-          window.location.href = "/fin";
+          window.location.href = "learn3";
         }
       }, 1000);
       return () => clearInterval(countdown);
