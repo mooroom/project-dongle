@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 // packages
 import { Link } from "react-router-dom";
@@ -12,9 +12,6 @@ import Container from "../components/Container";
 import BottomBox from "../components/BottomBox";
 
 function Learn2(props) {
-  // const [end, setEnd] = useState(false);
-
-  // const linkHandler = () => end && "/prepare";
   const linkHandler = () => "/prepare";
 
   return (
@@ -26,17 +23,11 @@ function Learn2(props) {
           url="https://www.youtube.com/embed/h0Ls3unm-nA"
           width="100%"
           height="auto"
-          // onEnded={() => {
-          //   setEnd(true);
-          // }}
         />
       </Container>
 
       <BottomBox>
         <Link to={linkHandler}>
-          {/* <Button width="100%" reactive activate={end}>
-            다음으로 넘어가기
-          </Button> */}
           <Button width="100%">다음으로 넘어가기</Button>
         </Link>
       </BottomBox>

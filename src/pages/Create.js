@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 // packages
-import { Link } from "react-router-dom";
 
 // components
 import Navbar from "../components/Navbar";

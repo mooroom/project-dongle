@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 // images
 import background from "../asset/img/background.png";
 
-// componente
+// component
 import Button from "../components/Button";
 import BodyBackground from "../components/BodyBackground";
 import BottomBox from "../components/BottomBox";
+import Navbar from "../components/Navbar";
 
 function Home(props) {
   const global = {
@@ -33,7 +34,7 @@ function Home(props) {
   return (
     <div style={global}>
       <BodyBackground image={background} />
-
+      <Navbar color="transparent" />
       <BottomBox>
         <div style={subtitle}>Artificial Intelligence DONGLE</div>
         <div style={title}>

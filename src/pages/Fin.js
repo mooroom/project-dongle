@@ -10,7 +10,6 @@ import { ReactComponent as SurveyIcon } from "../asset/img/icon_survey.svg";
 import styled, { css } from "styled-components";
 import { darken, lighten } from "polished";
 import { Link } from "react-router-dom";
-import Learn1 from "./Learn1";
 
 const ItemBlock = styled.div`
   display: flex;

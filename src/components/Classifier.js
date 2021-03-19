@@ -1,7 +1,7 @@
 import React from "react";
 
 // packages
-import styled, { css, keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 // images
 import dongle_thinking from "../asset/img/dongle_thinking1.png";
