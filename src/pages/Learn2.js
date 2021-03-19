@@ -38,9 +38,15 @@ function Learn2(props) {
       <Container flex height="100vh">
         <ReactPlayer
           url="https://www.youtube.com/embed/h0Ls3unm-nA"
+          config={{
+            youtube: {
+              playerVars: {showinfo: 1}
+            }
+          }}
           width="100%"
           height="auto"
           onEnded={() => setEnded(true)}
+          controls
         />
       </Container>
       <BottomBox>
