@@ -13,7 +13,9 @@ function AR(props) {
         left: "0",
         width: "100%",
         padding: "0 50px",
-        boxSizing: "border-box"
+        boxSizing: "border-box",
+        display: "flex",
+        alignItems: "flex-end"
     }
     return (
         <div>

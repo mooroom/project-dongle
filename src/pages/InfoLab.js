@@ -31,12 +31,12 @@ const Footer = styled.div`
     position: fixed;
     bottom: 0;
     left: 0;
-    padding: 20px 50px;
+    padding: 20px 30px;
     box-sizing: border-box;
     color: white;
     background: #55119E;
     width: 100%;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     .lab{
         font-weight: bold;
         margin-bottom: 1rem;
