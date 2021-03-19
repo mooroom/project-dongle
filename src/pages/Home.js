@@ -34,7 +34,7 @@ function Home(props) {
   return (
     <div style={global}>
       <BodyBackground image={background} />
-      <Navbar color="transparent" />
+      <Navbar color="transparent" home/>
       <BottomBox>
         <div style={subtitle}>Artificial Intelligence DONGLE</div>
         <div style={title}>

@@ -1,9 +1,14 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+// components
+import Menu from '../components/Menu';
+
+// images
 import { ReactComponent as HomeIcon } from "../asset/img/icon_home.svg";
 import { ReactComponent as SoundIcon } from "../asset/img/icon_sound.svg";
+import { ReactComponent as MenuIcon } from '../asset/img/icon_menu.svg';
 
 import Timer from '../components/Timer'
 
@@ -81,26 +86,42 @@ const NavBlock = styled.div`
   }
 `;
 
-function Navbar({ text, audioPlaying, timerPlaying, ...rest }) {
+function Navbar({ text, audioPlaying, timerPlaying, home, ...rest }) {
+  const [menu, setMenu] = useState(false);
+  const onMenuClick = () => {
+    setMenu(true);
+  }
+  const onCancel = () => {
+    setMenu(false);
+  }
   return (
-    <NavBlock {...rest}>
-      <Link to="/">
-        <div className="icon-container">
-          <HomeIcon fill="#55119e" />
-        </div>
-      </Link>
-      {audioPlaying && (
-        <div className="icon-container sound">
-          <SoundIcon fill="#55119e" />
-        </div>
-      )}
-      {timerPlaying && (
-        <div className="icon-container timer">
-          <Timer start={timerPlaying}/>
-        </div>
-      )}
-      <div className="title">{text}</div>
-    </NavBlock>
+    <>
+      <Menu visible={menu} onCancel={onCancel}/>
+      <NavBlock {...rest}>
+        {!home && (
+        <Link to="/">
+          <div className="icon-container">
+            <HomeIcon fill="#55119e" />
+          </div>
+        </Link>)}
+        {home && (
+          <div className="icon-container" onClick={onMenuClick}>
+            <MenuIcon fill="#55119e" />
+          </div>
+        )}
+        {audioPlaying && (
+          <div className="icon-container sound">
+            <SoundIcon fill="#55119e" />
+          </div>
+        )}
+        {timerPlaying && (
+          <div className="icon-container timer">
+            <Timer start={timerPlaying}/>
+          </div>
+        )}
+        <div className="title">{text}</div>
+      </NavBlock>
+    </>
   );
 }
 
