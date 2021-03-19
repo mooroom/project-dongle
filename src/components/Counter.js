@@ -16,7 +16,7 @@ const popUp = keyframes`
 
 const CounterBlock = styled.div`
   font-size: 2rem;
-  color: white;
+  color: #55119E;
   font-weight: bold;
   opacity: 0;
   animation-duration: 0.25s;
