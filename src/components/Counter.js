@@ -15,18 +15,20 @@ const popUp = keyframes`
 `;
 
 const CounterBlock = styled.div`
-  font-size: 2rem;
-  color: #55119E;
+  padding: 5px 8px;
+  box-sizing: border-box;
+  background: #e3e3e3;
+  border-radius: 10px;
+  font-size: 1.5rem;
+  color: #333333;
   font-weight: bold;
   opacity: 0;
-  animation-duration: 0.25s;
-  animation-timing-function: ease-in;
-  animation-fill-mode: forwards;
+  transition: all 0.25s ease-in;
 
   ${({ animate }) =>
     animate &&
     css`
-      animation-name: ${popUp};
+      opacity: 1;
     `}
 `;
 
@@ -40,9 +42,11 @@ function Counter({ count }) {
   }, [count]);
 
   return (
-    <CounterBlock animate={animate}>
-      {count === 0 ? null : `${8 - count}장 더!`}
-    </CounterBlock>
+    <>
+      {count === 0 ? null : (
+        <CounterBlock animate={animate}>{`${8 - count}장 더!`}</CounterBlock>
+      )}
+    </>
   );
 }
 

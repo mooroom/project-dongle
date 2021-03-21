@@ -58,7 +58,7 @@ function Prepare(props) {
     }
   };
 
-  const linkHander = () => ended && "/create";
+  const linkHander = () => ended && "/create2";
 
   return (
     <div style={{ color: "white" }}>

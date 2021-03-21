@@ -1,167 +1,182 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React, { useEffect, useState } from "react";
+import styled, { css, keyframes } from "styled-components";
 
 // images
-import heli_face1 from "../asset/img/heli_face1.png";
-import heli_face2 from "../asset/img/heli_face2.png";
-import heli_face3 from "../asset/img/heli_face3.png";
-import heli_leg1 from "../asset/img/heli_leg1.png";
-import heli_leg2 from "../asset/img/heli_leg2.png";
-import heli_leg3 from "../asset/img/heli_leg3.png";
-import heli_arm1 from "../asset/img/heli_arm1.png";
-import heli_arm2 from "../asset/img/heli_arm2.png";
-import heli_arm3 from "../asset/img/heli_arm3.png";
-import dongle_thinking from "../asset/img/dongle_thinking2.png";
+import guide_face from "../asset/img/guide_face.png";
+import guide_arm from "../asset/img/guide_arm.png";
+import guide_leg from "../asset/img/guide_leg.png";
+import guide_test from "../asset/img/guide_test.png";
 
-import icon_1 from "../asset/img/icon_1.png";
-import icon_2 from "../asset/img/icon_2.png";
-import icon_3 from "../asset/img/icon_3.png";
-import icon_o from "../asset/img/icon_o.png";
-import icon_x from "../asset/img/icon_x.png";
+import { ReactComponent as SoundIcon } from "../asset/img/icon_sound.svg";
+import { ReactComponent as ClearIcon } from "../asset/img/icon_clear.svg";
 
-const GuideBlock = styled.div`
-  width: 100%;
-  padding: 20px 40px;
-  background-color: white;
-  border-radius: 40px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-  box-sizing: border-box;
-  transition: all 0.5s ease-in;
+// sounds
+import audio_face from "../asset/sound/audio3_face.m4a";
+import audio_arm from "../asset/sound/audio4_arm.m4a";
+import audio_leg from "../asset/sound/audio5_leg.m4a";
+import audio_test from "../asset/sound/audio6_test.m4a";
 
-  .txt-con {
-    word-break: keep-all;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  ${(props) => {
-    const hide = props.hide;
-
-    if (hide) {
-      console.log(`hide: ${hide}`);
-      return css`
-        opacity: 0;
-        visibility: hidden;
-      `;
-    } else {
-      return css`
-        opacity: 1;
-        visibility: visible;
-      `;
-    }
-  }}
+const fadeIn = keyframes`
+  from {opacity: 0}
+  to {opacity: 1}
 `;
 
-const GuideImg = styled.div`
-  position: relative;
+const fadeOut = keyframes`
+  from {opacity: 1}
+  to {opacity: 0}
+`;
+
+const slideUp = keyframes`
+  from { transform: translateY(100px)}
+  to { transform: translateY(0px)}
+`;
+
+const slideDown = keyframes`
+  from { transform: translateY(0px)}
+  to { transform: translateY(100px)}
+`;
+
+const DarkBackground = styled.div`
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+
   display: flex;
-  flex-direction: row;
-  .tag {
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    width: 40px;
-  }
-  .left {
-    width: 35%;
-    background-color: #c6afde;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom-left-radius: 40px;
-    padding: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  animation-duration: 0.25s;
+  animation-timing-function: ease-out;
+  animation-name: ${fadeIn};
+  animation-fill-mode: forwards;
+
+  ${(props) =>
+    props.disappear &&
+    css`
+      animation-name: ${fadeOut};
+    `}
+
+  .imgContainer {
+    width: 100%;
+    padding: 0 40px;
     box-sizing: border-box;
-    word-break: keep-all;
-  }
-  .right {
-    width: 65%;
-    display: flex;
+    animation-duration: 0.25s;
+    animation-timing-function: ease-out;
+    animation-name: ${slideUp};
+    animation-fill-mode: forwards;
 
-    img {
-      width: 100%;
-      align-self: flex-start;
-      object-fit: contain;
-      border-top-right-radius: 40px;
-      border-bottom-right-radius: 40px;
-    }
-  }
-  & + & {
-    margin-top: 1rem;
+    ${(props) =>
+      props.disappear &&
+      css`
+        animation-name: ${slideDown};
+      `}
   }
 
-  & + Button {
-    margin-top: 1rem;
+  img {
+    width: 100%;
   }
 `;
 
-const types = {
-  learn: [
-    [icon_1, "얼굴을 찍어줘", heli_face2],
-    [icon_2, "팔을 찍어줘", heli_arm2],
-    [icon_3, "다리를 찍어줘", heli_leg2],
-  ],
-  arm: [
-    [icon_x, "너무 가까워", heli_arm1],
-    [icon_o, "좋아!", heli_arm2],
-    [icon_x, "너무 멀어", heli_arm3],
-  ],
-  face: [
-    [icon_x, "너무 가까워", heli_face1],
-    [icon_o, "좋아!", heli_face2],
-    [icon_x, "너무 멀어", heli_face3],
-  ],
-  leg: [
-    [icon_x, "너무 가까워", heli_leg1],
-    [icon_o, "좋아!", heli_leg2],
-    [icon_x, "너무 멀어", heli_leg3],
-  ],
-  test: dongle_thinking,
-};
+const playing = keyframes`
+  0% {transform: scale(1)}
+  50% {transform: scale(1.1)}
+  100% {transform: scale(1)}
+`;
 
-function Guide({ type, hide }) {
-  let guideText;
-  let guideType;
-
-  if (type === "learn") {
-    guideText =
-      "동글이에게 얼굴, 팔, 다리 사진을 찍어서 보여주면 동글이가 얼굴, 팔, 다리를 만들 수 있어!";
-    guideType = types.learn;
-  } else if (type === "arm") {
-    guideText =
-      "손과 팔 사진 8장을 찍어서 모아줘! 손과 팔만 잘 나오도록 찍어줘야해~";
-    guideType = types.arm;
-  } else if (type === "face") {
-    guideText =
-      "얼굴 사진 8장을 찍어서 모아줘! 얼굴 전체가 다 나오게 찍어줘야해~";
-    guideType = types.face;
-  } else if (type === "leg") {
-    guideText = "다리 사진 8장을 찍어서 모아줘! 다리만 잘 나오도록 찍어줘야해~";
-    guideType = types.leg;
-  } else if (type === "test") {
-    guideText =
-      "이제 동글이를 테스트해보자! 카메라를 통해 동글이에게 얼굴, 팔, 다리 중 하나를 물어보면 동글이가 맞춰볼꺼야!";
-    guideType = types.test;
+const SoundBtn = styled.div`
+  position: absolute;
+  bottom: 30px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background: #e3e3e3;
+  padding: 10px;
+  & > * {
+    width: 100%;
+    height: 100%;
   }
 
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+
+  ${(props) =>
+    props.playing &&
+    css`
+      animation-name: ${playing};
+    `}
+`;
+
+const images = [guide_face, guide_arm, guide_leg, guide_test];
+const audios = [audio_face, audio_arm, audio_leg, audio_test];
+
+function Guide({ visible, step, onCancel }) {
+  const [img, setImg] = useState(images[0]);
+  const [audio, setAudio] = useState(new Audio(audios[0]));
+  const [playing, setPlaying] = useState(false);
+  const [end, setEnd] = useState(false);
+
+  const [animate, setAnimate] = useState(false);
+  const [localVisible, setLocalVisible] = useState(visible);
+
+  useEffect(() => {
+    if (localVisible && !visible) {
+      setAnimate(true);
+      setTimeout(() => setAnimate(false), 250);
+    }
+    setLocalVisible(visible);
+  }, [localVisible, visible]);
+
+  useEffect(() => {
+    setImg(images[step]);
+    setAudio(new Audio(audios[step]));
+  }, [step]);
+
+  useEffect(() => {
+    audio.addEventListener("ended", () => {
+      setPlaying(false);
+      setEnd(true);
+      console.log("end");
+    });
+    return () => {
+      audio.removeEventListener("ended", () => setPlaying(false));
+    };
+  }, [audio]);
+
+  const onClick = () => {
+    if (end) {
+      onCancel();
+      setEnd(false);
+    } else {
+      setPlaying(true);
+      audio.play();
+    }
+  };
+
+  if (!animate && !localVisible) return null;
   return (
-    <GuideBlock hide={hide}>
-      <div className="txt-con">{guideText}</div>
-      {type === "test" ? (
-        <img src={guideType} alt="img" style={{ width: "100%" }} />
-      ) : (
-        guideType.map((content, index) => (
-          <GuideImg key={index}>
-            <img className="tag" src={content[0]} alt="tag" />
-            <div className="left">{content[1]}</div>
-            <div className="right">
-              <img src={content[2]} alt="right" />
-            </div>
-          </GuideImg>
-        ))
-      )}
-    </GuideBlock>
+    <DarkBackground disappear={!visible}>
+      <div className="imgContainer">
+        <img src={img} alt="guide_img" />
+      </div>
+      <SoundBtn onClick={onClick} playing={playing}>
+        {end ? (
+          <ClearIcon fill="#333333" />
+        ) : (
+          <SoundIcon fill={playing ? "#333333" : "#aaaaaa"} />
+        )}
+      </SoundBtn>
+    </DarkBackground>
   );
 }
 
