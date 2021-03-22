@@ -89,7 +89,7 @@ const playing = keyframes`
 `;
 
 const SoundBtn = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 30px;
   cursor: pointer;
   width: 50px;
