@@ -15,7 +15,7 @@ import Counter from "../components/Counter";
 import Guide from "../components/Guide";
 
 const CamButton = styled.div`
-  position: fixed;
+  position: absolute;
   bottom: 30px;
   cursor: pointer;
   width: 50px;
