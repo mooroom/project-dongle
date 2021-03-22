@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import styled from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 
 // components
 import Navbar from "../components/Navbar";
@@ -13,6 +13,15 @@ import Classifier from "../components/Classifier";
 import Camera from "../components/Camera";
 import Counter from "../components/Counter";
 import Guide from "../components/Guide";
+import Loader2 from "../components/Loader2";
+
+// images
+import dongle_face from "../asset/img/dongle_face.gif";
+
+const rotate = keyframes`
+  from {transform: rotate(0deg)}
+  to {transform: rotate(360deg)}
+`;
 
 const CamButton = styled.div`
   position: absolute;
@@ -26,18 +35,22 @@ const CamButton = styled.div`
   justify-content: center;
   box-sizing: border-box;
   background: #e3e3e3;
+
+  ${({ loading }) =>
+    loading &&
+    css`
+      visibility: hidden;
+    `}
 `;
 
 function Create2(props) {
   const [guide, setGuide] = useState(true);
   const [step, setStep] = useState(0);
   const [count, setCount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const onCancel = () => {
     setGuide(false);
-    setTimeout(() => {
-      setStep((step) => step + 1);
-    }, 250);
   };
 
   const onClick = () => {
@@ -47,6 +60,7 @@ function Create2(props) {
   useEffect(() => {
     if (count === 8) {
       setCount(0);
+      setLoading(true);
     }
   }, [count]);
 
@@ -57,7 +71,14 @@ function Create2(props) {
       <Camera />
       <Counter count={count} />
       <Classifier />
-      <CamButton onClick={onClick} />
+      <CamButton onClick={onClick} loading={loading} />
+      <Loader2
+        visible={loading}
+        step={step}
+        setGuide={setGuide}
+        setStep={setStep}
+        setLoading={setLoading}
+      />
     </Container>
   );
 }
