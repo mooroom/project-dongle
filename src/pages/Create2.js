@@ -4,24 +4,12 @@ import styled, { css, keyframes } from "styled-components";
 
 // components
 import Navbar from "../components/Navbar";
-import Button from "../components/Button";
 import Container from "../components/Container";
-import Alert from "../components/Alert";
-import BottomBox from "../components/BottomBox";
-import Loader from "../components/Loader";
 import Classifier from "../components/Classifier";
 import Camera from "../components/Camera";
 import Counter from "../components/Counter";
 import Guide from "../components/Guide";
 import Loader2 from "../components/Loader2";
-
-// images
-import dongle_face from "../asset/img/dongle_face.gif";
-
-const rotate = keyframes`
-  from {transform: rotate(0deg)}
-  to {transform: rotate(360deg)}
-`;
 
 const CamButton = styled.div`
   position: absolute;
@@ -36,8 +24,8 @@ const CamButton = styled.div`
   box-sizing: border-box;
   background: #e3e3e3;
 
-  ${({ loading }) =>
-    loading &&
+  ${({ loading, testMode }) =>
+    (loading || testMode) &&
     css`
       visibility: hidden;
     `}
@@ -48,9 +36,13 @@ function Create2(props) {
   const [step, setStep] = useState(0);
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [test, setTest] = useState(false);
 
   const onCancel = () => {
     setGuide(false);
+    if (step === 3) {
+      setTest(true);
+    }
   };
 
   const onClick = () => {
@@ -66,12 +58,11 @@ function Create2(props) {
 
   return (
     <Container flex height="100vh">
-      <Guide visible={guide} step={step} onCancel={onCancel} />
-      <Navbar text="동글이 키우는 법" />
       <Camera />
+      <Guide visible={guide} step={step} onCancel={onCancel} />
+      <Navbar text="동글이 키우는 법" timerPlaying={test} />
       <Counter count={count} />
-      <Classifier />
-      <CamButton onClick={onClick} loading={loading} />
+      <CamButton onClick={onClick} loading={loading} testMode={test} />
       <Loader2
         visible={loading}
         step={step}
@@ -79,6 +70,7 @@ function Create2(props) {
         setStep={setStep}
         setLoading={setLoading}
       />
+      <Classifier visible={test} />
     </Container>
   );
 }

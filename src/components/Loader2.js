@@ -3,26 +3,12 @@ import React, { useEffect, useState } from "react";
 // packages
 import styled, { css, keyframes } from "styled-components";
 
-// components
-import BottomBox from "./BottomBox";
-import Button from "./Button";
-
 // images
 import dongle_face from "../asset/img/dongle_face.gif";
 import dongle_arm from "../asset/img/dongle_arm.gif";
 import dongle_leg from "../asset/img/dongle_leg.gif";
 
 import { ReactComponent as DoneIcon } from "../asset/img/icon_done.svg";
-
-const fadeIn = keyframes`
-    from {opacity: 0;}
-    to {opacity: 1;}
-`;
-
-const fadeOut = keyframes`
-    from {opacity: 1;}
-    to {opacity: 0;}
-`;
 
 const rotate = keyframes`
     from {transform: rotate(0deg)}
