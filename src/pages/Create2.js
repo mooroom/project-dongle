@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import styled, { css, keyframes } from "styled-components";
+import styled, { css } from "styled-components";
 
 // components
 import Navbar from "../components/Navbar";

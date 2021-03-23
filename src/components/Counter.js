@@ -1,18 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 // packages
-import styled, { css, keyframes } from "styled-components";
-
-const popUp = keyframes`
-    50% {
-        transform: translateY(-5px);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(0px);
-        opacity: 0;
-    }
-`;
+import styled, { css } from "styled-components";
 
 const CounterBlock = styled.div`
   padding: 5px 8px;
