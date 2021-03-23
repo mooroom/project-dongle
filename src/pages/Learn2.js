@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Div100vh from "react-div-100vh";
 
 // packages
 import { Link } from "react-router-dom";
@@ -32,7 +31,7 @@ function Learn2(props) {
   }, [ended]);
 
   return (
-    <Div100vh>
+    <>
       <BodyBackground color="black" />
       <Navbar color="transparent" />
       <Container flex height="100vh">
@@ -60,7 +59,7 @@ function Learn2(props) {
         text="동영상을 모두 보고 난 후 다음 페이지로 갈 수 있어!"
         show={show}
       />
-    </Div100vh>
+    </>
   );
 }
 
