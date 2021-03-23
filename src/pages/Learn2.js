@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
+import Div100vh from "react-div-100vh";
 
 // packages
 import { Link } from "react-router-dom";
@@ -12,27 +13,26 @@ import Container from "../components/Container";
 import BottomBox from "../components/BottomBox";
 import Alert from "../components/Alert";
 
-
 function Learn2(props) {
   const [ended, setEnded] = useState(false);
   const [show, setShow] = useState(false);
-  const [link, setLink] = useState("#")
+  const [link, setLink] = useState("#");
 
   const linkHandler = () => {
     if (!ended) {
       setShow(true);
       setTimeout(() => setShow(false), 500);
-    } 
+    }
   };
 
   useEffect(() => {
     if (ended) {
-      setLink("/prepare")
+      setLink("/prepare");
     }
-  }, [ended])
+  }, [ended]);
 
   return (
-    <>
+    <Div100vh>
       <BodyBackground color="black" />
       <Navbar color="transparent" />
       <Container flex height="100vh">
@@ -40,8 +40,8 @@ function Learn2(props) {
           url="https://www.youtube.com/embed/h0Ls3unm-nA"
           config={{
             youtube: {
-              playerVars: {showinfo: 1}
-            }
+              playerVars: { showinfo: 1 },
+            },
           }}
           width="100%"
           height="auto"
@@ -51,11 +51,16 @@ function Learn2(props) {
       </Container>
       <BottomBox>
         <Link to={link}>
-          <Button width="100%" onClick={linkHandler}>다음으로 넘어가기</Button>
+          <Button width="100%" onClick={linkHandler}>
+            다음으로 넘어가기
+          </Button>
         </Link>
       </BottomBox>
-      <Alert text="동영상을 모두 보고 난 후 다음 페이지로 갈 수 있어!" show={show}/>
-    </>
+      <Alert
+        text="동영상을 모두 보고 난 후 다음 페이지로 갈 수 있어!"
+        show={show}
+      />
+    </Div100vh>
   );
 }
 

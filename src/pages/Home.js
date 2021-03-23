@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Div100vh from "react-div-100vh";
 
 // images
 import background from "../asset/img/background.png";
@@ -32,9 +33,9 @@ function Home(props) {
   };
 
   return (
-    <div style={global}>
+    <Div100vh style={global}>
       <BodyBackground image={background} />
-      <Navbar color="transparent" home/>
+      <Navbar color="transparent" home />
       <BottomBox>
         <div style={subtitle}>Artificial Intelligence DONGLE</div>
         <div style={title}>
@@ -48,7 +49,7 @@ function Home(props) {
           <br />X 국립어린이과학관
         </div>
       </BottomBox>
-    </div>
+    </Div100vh>
   );
 }
 

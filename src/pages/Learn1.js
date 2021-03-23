@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Div100vh from "react-div-100vh";
 
 // components
 import Navbar from "../components/Navbar";
@@ -14,7 +15,7 @@ import learn_info from "../asset/img/learn_info.png";
 
 function Learn1() {
   return (
-    <>
+    <Div100vh>
       <Navbar color="transparent" />
       <Container top="70px">
         <img
@@ -38,7 +39,7 @@ function Learn1() {
           </Link>
         </BottomBox>
       </Container>
-    </>
+    </Div100vh>
   );
 }
 
