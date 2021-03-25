@@ -24,8 +24,8 @@ const CamButton = styled.div`
   box-sizing: border-box;
   background: #e3e3e3;
 
-  ${({ loading, testMode }) =>
-    (loading || testMode) &&
+  ${(props) =>
+    (props.isLoading || props.testMode) &&
     css`
       visibility: hidden;
     `}
@@ -35,7 +35,7 @@ function Create2(props) {
   const [guide, setGuide] = useState(true);
   const [step, setStep] = useState(0);
   const [count, setCount] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [load, setLoad] = useState(false);
   const [test, setTest] = useState(false);
 
   const onCancel = () => {
@@ -52,25 +52,25 @@ function Create2(props) {
   useEffect(() => {
     if (count === 8) {
       setCount(0);
-      setLoading(true);
+      setLoad(true);
     }
   }, [count]);
 
   return (
     <Container flex height="100vh">
-      <Camera />
+      <Camera testMode={test} />
       <Guide visible={guide} step={step} onCancel={onCancel} />
       <Navbar text="동글이 키우는 법" timerPlaying={test} />
       <Counter count={count} />
-      <CamButton onClick={onClick} loading={loading} testMode={test} />
+      <CamButton onClick={onClick} isLoading={load} testMode={test} />
       <Loader2
-        visible={loading}
+        visible={load}
         step={step}
         setGuide={setGuide}
         setStep={setStep}
-        setLoading={setLoading}
+        setLoading={setLoad}
       />
-      <Classifier visible={test} />
+      {/* <Classifier visible={test} /> */}
     </Container>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router";
 
 function Timer({ start }) {
-  const [seconds, setSeconds] = useState(10);
+  const [seconds, setSeconds] = useState(30);
   const [fin, setFin] = useState(false);
 
   useEffect(() => {

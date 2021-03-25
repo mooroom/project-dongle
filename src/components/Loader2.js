@@ -84,7 +84,7 @@ const LoaderButton = styled.div`
   }
 
   ${(props) =>
-    !props.loading &&
+    !props.isLoading &&
     css`
       background: #55119e;
       animation: ${scale} 0.25s cubic-bezier(0.1, -0.6, 0.2, 0) 1;
@@ -138,7 +138,7 @@ function Loader2({ visible, step, setGuide, setStep, setLoading }) {
         <img src={gif} alt="gif" />
         <div className="text">{text}</div>
       </GifBlock>
-      <LoaderButton loading={localLoading} onClick={onClick}>
+      <LoaderButton isLoading={localLoading} onClick={onClick}>
         <DoneIcon fill="white" />
       </LoaderButton>
     </>
