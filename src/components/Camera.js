@@ -41,10 +41,11 @@ function Camera({ testMode }) {
   const [result, setResult] = useState([]);
 
   useEffect(() => {
-    classifier = ml5.imageClassifier("./model/model.json", () => {
+    classifier = ml5.imageClassifier("model/model.json", () => {
       navigator.mediaDevices
         .getUserMedia({
-          video: { facingMode: { exact: "environment" } },
+          // video: { facingMode: { exact: "environment" } },
+          video: true,
           audio: false,
         })
         .then((stream) => {
