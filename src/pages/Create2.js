@@ -5,7 +5,7 @@ import styled, { css } from "styled-components";
 // components
 import Navbar from "../components/Navbar";
 import Container from "../components/Container";
-import Classifier from "../components/Classifier";
+// import Classifier from "../components/Classifier";
 import Camera from "../components/Camera";
 import Counter from "../components/Counter";
 import Guide from "../components/Guide";
