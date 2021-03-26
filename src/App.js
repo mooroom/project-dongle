@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Learn1 from "./pages/Learn1";
 import Learn2 from "./pages/Learn2";
 import Prepare from "./pages/Prepare";
+import Create from "./pages/Create";
 import Create2 from "./pages/Create2";
 import Test from "./pages/Test";
 import Learn3 from "./pages/Learn3";
@@ -19,19 +20,20 @@ import GameDance from "./pages/GameDance";
 import GameVirus from "./pages/GameVirus";
 
 function App() {
-  // const appHeight = () => {
-  //   const doc = document.documentElement;
-  //   doc.style.setProperty("--app-height", `${window.innerHeight}px`);
-  // };
-  // window.addEventListener("resize", appHeight);
-  // appHeight();
+  const appHeight = () => {
+    const doc = document.documentElement;
+    doc.style.setProperty("--app-height", `${window.innerHeight}px`);
+  };
+  window.addEventListener("resize", appHeight);
+  appHeight();
   return (
     <Router>
-      <Route exact path="/home" component={Home} />
+      <Route exact path="/" component={Home} />
       <Route path="/learn1" component={Learn1} />
       <Route path="/learn2" component={Learn2} />
       <Route path="/prepare" component={Prepare} />
-      <Route path="/" component={Create2} />
+      <Route path="/create" component={Create} />
+      <Route path="/create2" component={Create2} />
       <Route path="/test" component={Test} />
       <Route path="/learn3" component={Learn3} />
       <Route path="/fin" component={Fin} />
