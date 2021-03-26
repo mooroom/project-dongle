@@ -3,69 +3,73 @@ import React, { useEffect, useState } from "react";
 // packages
 import styled, { css, keyframes } from "styled-components";
 
-// components
-import BottomBox from "./BottomBox";
-import Button from "./Button";
-
 // images
 import dongle_face from "../asset/img/dongle_face.gif";
 import dongle_arm from "../asset/img/dongle_arm.gif";
 import dongle_leg from "../asset/img/dongle_leg.gif";
-import guide_arm from "../asset/img/guide_arm.png";
-import guide_leg from "../asset/img/guide_leg.png";
 
-const fadeIn = keyframes`
-    from {opacity: 0;}
-    to {opacity: 1;}
+import { ReactComponent as DoneIcon } from "../asset/img/icon_done.svg";
+
+const rotate = keyframes`
+    from {transform: rotate(0deg)}
+    to {transform: rotate(360deg)}
 `;
 
-const fadeOut = keyframes`
-    from {opacity: 1;}
-    to {opacity: 0;}
+const scale = keyframes`
+    0% {transform: scale(1)}
+    50% {transform: scale(1.2)}
+    100% {transform: scale(1)}
 `;
 
-const LoaderBlock = styled.div`
-  position: absolute;
-  z-index: 999;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.9);
+const GifBlock = styled.div`
+  visibility: hidden;
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  transition: all 0.5s ease-in;
+  opacity: 0;
 
-  animation-duration: 0.5s;
-  animation-timing-function: ease-out;
-  animation-name: ${fadeIn};
-  animation-fill-mode: forwards;
-
-  ${(props) =>
-    props.disappear &&
-    css`
-      animation-name: ${fadeOut};
-    `}
-
-  .text {
-    font-size: 1.5rem;
-    color: white;
-  }
   img {
     width: 100%;
     filter: drop-shadow(0px 0px 10px white);
   }
+
+  .text {
+    padding: 5px 8px;
+    box-sizing: border-box;
+    background: #e3e3e3;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    color: #333333;
+    font-weight: bold;
+    height: 2.5rem;
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  ${({ show }) =>
+    show &&
+    css`
+      visibility: visible;
+      opacity: 1;
+    `}
 `;
 
-const LoaderObj = styled.div`
-  position: fixed;
-  width: 40px;
-  height: 40px;
+const LoaderButton = styled.div`
+  position: absolute;
+  bottom: 30px;
+  width: 50px;
+  height: 50px;
   background: linear-gradient(#55119e, #c3a3e5);
   border-radius: 50%;
-  animation: rotate 0.4s linear infinite;
-  transition: all 0.4s ease-in;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  & > * {
+    visibility: hidden;
+  }
+
+  animation: ${rotate} 0.4s linear infinite;
+  transition: all 0.25s ease-in;
 
   &::before {
     content: "";
@@ -79,71 +83,64 @@ const LoaderObj = styled.div`
     filter: blur(10px);
   }
 
-  @keyframes rotate {
-    from {
-      transform: rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg);
-    }
-  }
+  ${(props) =>
+    !props.isLoading &&
+    css`
+      background: #55119e;
+      animation: ${scale} 0.25s cubic-bezier(0.1, -0.6, 0.2, 0) 1;
+      &::before {
+        visibility: hidden;
+      }
+      & > * {
+        visibility: visible;
+      }
+    `}
 `;
 
-function Loader({ visible, onCancel, step, setMode }) {
-  const [animate, setAnimate] = useState(false);
-  const [localVisible, setLocalVisible] = useState(visible);
-  const [loading, setLoading] = useState(true);
+const gifs = [dongle_face, dongle_arm, dongle_leg];
+const texts = ["얼굴을 만들었어요!", "팔을 만들었어요!", "다리를 만들었어요!"];
 
-  const [dongle, setDongle] = useState(dongle_face);
-  const [dongleText, setDongleText] = useState("얼굴을 만들었어요!");
+function Loader({ visible, step, setGuide, setStep, setLoading }) {
+  const [gif, setGif] = useState(gifs[step]);
+  const [text, setText] = useState(texts[step]);
+  const [show, setShow] = useState(false);
+  const [localLoading, setLocalLoading] = useState(true);
 
   useEffect(() => {
-    switch (step) {
-      case guide_arm:
-        setDongle(dongle_arm);
-        setDongleText("팔을 만들었어요!");
-        break;
-      case guide_leg:
-        setDongle(dongle_leg);
-        setDongleText("다리를 만들었어요!");
-        break;
-      default:
-        setDongle(dongle_face);
+    if (visible) {
+      setTimeout(() => {
+        setLocalLoading(false);
+        setShow(true);
+      }, 3000);
     }
+  }, [visible]);
+
+  useEffect(() => {
+    setGif(gifs[step]);
+    setText(texts[step]);
   }, [step]);
 
-  useEffect(() => {
-    if (localVisible && visible) {
-      setTimeout(() => setLoading(false), 3000);
-    }
-    if (localVisible && !visible) {
-      setAnimate(true);
-      setTimeout(() => setAnimate(false), 500);
-    }
-    setLocalVisible(visible);
-  }, [localVisible, visible]);
-
   const onClick = () => {
-    onCancel();
-    setLoading(true);
-    setMode("guide");
+    if (!localLoading) {
+      setLoading(false);
+      setGuide(true);
+      setStep((step) => step + 1);
+
+      setShow(false);
+      setLocalLoading(true);
+    }
   };
 
-  if (!animate && !localVisible) return null;
+  if (!visible) return null;
   return (
     <>
-      <LoaderBlock disappear={!visible}>
-        {!loading && <div className="text">{dongleText}</div>}
-        {!loading && <img src={dongle} alt="gif" />}
-        {loading && <LoaderObj />}
-      </LoaderBlock>
-      {!loading && (
-        <BottomBox zIndex="1000">
-          <Button width="100%" onClick={onClick}>
-            다음
-          </Button>
-        </BottomBox>
-      )}
+      <GifBlock show={show}>
+        <img src={gif} alt="gif" />
+        <div className="text">{text}</div>
+      </GifBlock>
+      <LoaderButton isLoading={localLoading} onClick={onClick}>
+        <DoneIcon fill="white" />
+      </LoaderButton>
     </>
   );
 }

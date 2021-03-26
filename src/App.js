@@ -8,7 +8,6 @@ import Learn1 from "./pages/Learn1";
 import Learn2 from "./pages/Learn2";
 import Prepare from "./pages/Prepare";
 import Create from "./pages/Create";
-import Create2 from "./pages/Create2";
 import Test from "./pages/Test";
 import Learn3 from "./pages/Learn3";
 import Fin from "./pages/Fin";
@@ -33,7 +32,6 @@ function App() {
       <Route path="/learn2" component={Learn2} />
       <Route path="/prepare" component={Prepare} />
       <Route path="/create" component={Create} />
-      <Route path="/create2" component={Create2} />
       <Route path="/test" component={Test} />
       <Route path="/learn3" component={Learn3} />
       <Route path="/fin" component={Fin} />
