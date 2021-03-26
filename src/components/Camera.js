@@ -40,26 +40,16 @@ function Camera({ testMode }) {
   const videoRef = useRef();
   const [result, setResult] = useState([]);
 
-  const cameraHandler = () => {
-    navigator.mediaDevices
-      .getUserMedia({
-        // video: { facingMode: { exact: "environment" } },
-        video: true,
-        audio: false,
-      })
-      .then((stream) => {
-        videoRef.current.srcObject = stream;
-        // videoRef.current.play();
-      });
-  };
-
   useEffect(() => {
-    if (testMode) {
-      classifier = ml5.imageClassifier("model/model.json", () => cameraHandler);
-    } else {
-      cameraHandler();
-    }
-  }, [testMode]);
+    classifier = ml5.imageClassifier("./model/model.json", () => {
+      navigator.mediaDevices
+        .getUserMedia({ video: true, audio: false })
+        .then((stream) => {
+          videoRef.current.srcObject = stream;
+          videoRef.current.play();
+        });
+    });
+  }, []);
 
   useInterval(() => {
     if (classifier) {
@@ -68,7 +58,6 @@ function Camera({ testMode }) {
           console.error(error);
           return;
         }
-        console.log(results);
         setResult(results);
       });
     }
@@ -76,10 +65,10 @@ function Camera({ testMode }) {
 
   return (
     <CameraBlock>
-      <video className="videoFeed" autoPlay ref={videoRef} />
-      {/* {testMode && (
+      <video className="videoFeed" ref={videoRef} />
+      {testMode && (
         <div className="result">{result[0].label.split(",")[0]}</div>
-      )} */}
+      )}
     </CameraBlock>
   );
 }
