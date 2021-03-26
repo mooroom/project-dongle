@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import ml5 from "ml5";
-import useInterval from "@use-it/interval";
 
 const CameraBlock = styled.div`
   position: fixed;
@@ -36,6 +35,26 @@ const CameraBlock = styled.div`
 
 let classifier;
 
+function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
+
 function Camera({ testMode }) {
   const videoRef = useRef();
   const [result, setResult] = useState([]);
@@ -51,24 +70,24 @@ function Camera({ testMode }) {
     });
   }, []);
 
-  // useInterval(() => {
-  //   if (classifier) {
-  //     classifier.classify(videoRef.current, (error, results) => {
-  //       if (error) {
-  //         console.error(error);
-  //         return;
-  //       }
-  //       setResult(results);
-  //     });
-  //   }
-  // }, 500);
+  useInterval(() => {
+    if (classifier) {
+      classifier.classify(videoRef.current, (error, results) => {
+        if (error) {
+          console.error(error);
+          return;
+        }
+        setResult(results);
+      });
+    }
+  }, 500);
 
   return (
     <CameraBlock>
       <video className="videoFeed" ref={videoRef} />
-      {/* {testMode && (
+      {testMode && (
         <div className="result">{result[0].label.split(",")[0]}</div>
-      )} */}
+      )}
     </CameraBlock>
   );
 }
