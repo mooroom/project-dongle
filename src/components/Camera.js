@@ -50,7 +50,7 @@ function Camera({ testMode }) {
         })
         .then((stream) => {
           videoRef.current.srcObject = stream;
-          videoRef.current.play();
+          // videoRef.current.play();
         });
     });
   }, []);
@@ -70,10 +70,10 @@ function Camera({ testMode }) {
 
   return (
     <CameraBlock>
-      <video className="videoFeed" ref={videoRef} />
-      {/* {testMode && (
+      <video className="videoFeed" autoPlay ref={videoRef} />
+      {testMode && (
         <div className="result">{result[0].label.split(",")[0]}</div>
-      )} */}
+      )}
     </CameraBlock>
   );
 }
