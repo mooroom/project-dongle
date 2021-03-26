@@ -71,6 +71,8 @@ function Camera({ testMode }) {
     });
   }, []);
 
+  let i;
+
   useInterval(() => {
     if (classifier) {
       classifier.classify(videoRef.current, (error, results) => {
