@@ -71,9 +71,9 @@ function Camera({ testMode }) {
   return (
     <CameraBlock>
       <video className="videoFeed" ref={videoRef} />
-      {testMode && (
+      {/* {testMode && (
         <div className="result">{result[0].label.split(",")[0]}</div>
-      )}
+      )} */}
     </CameraBlock>
   );
 }
