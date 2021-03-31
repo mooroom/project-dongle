@@ -71,8 +71,6 @@ function Camera({ testMode }) {
     });
   }, []);
 
-  let i;
-
   useInterval(() => {
     if (classifier) {
       classifier.classify(videoRef.current, (error, results) => {
@@ -87,7 +85,7 @@ function Camera({ testMode }) {
 
   return (
     <CameraBlock>
-      <video className="videoFeed" ref={videoRef} />
+      <video className="videoFeed" ref={videoRef} playsInline/>
       {testMode && (
         <div className="result">{result[0].label.split(",")[0]}</div>
       )}
