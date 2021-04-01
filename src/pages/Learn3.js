@@ -24,7 +24,7 @@ function Learn3() {
     <>
       <BodyBackground color="#8C63BC" />
       <Navbar color="transparent" />
-      <Container top="70px">
+      <Container top="80px">
         <TextBlock>
           <h2>정리하기</h2>
           <h4>인공지능에 대해서 더 알아볼까?</h4>
