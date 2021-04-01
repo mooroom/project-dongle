@@ -1,16 +1,16 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 // components
-import Menu from '../components/Menu';
+import Menu from "../components/Menu";
 
 // images
 import { ReactComponent as HomeIcon } from "../asset/img/icon_home.svg";
 import { ReactComponent as SoundIcon } from "../asset/img/icon_sound.svg";
-import { ReactComponent as MenuIcon } from '../asset/img/icon_menu.svg';
+import { ReactComponent as MenuIcon } from "../asset/img/icon_menu.svg";
 
-import Timer from '../components/Timer'
+import Timer from "../components/Timer";
 
 const NavBlock = styled.div`
   position: fixed;
@@ -33,18 +33,20 @@ const NavBlock = styled.div`
   }
 
   .icon-container {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background-color: #ffea00;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     margin-right: 10px;
+    box-sizing: border-box;
+    padding: 10px;
 
     & > * {
-      width: 25px;
-      height: 25px;
+      width: 100%;
+      height: 100%;
     }
   }
 
@@ -90,20 +92,21 @@ function Navbar({ text, audioPlaying, timerPlaying, home, ...rest }) {
   const [menu, setMenu] = useState(false);
   const onMenuClick = () => {
     setMenu(true);
-  }
+  };
   const onCancel = () => {
     setMenu(false);
-  }
+  };
   return (
     <>
-      <Menu visible={menu} onCancel={onCancel}/>
+      <Menu visible={menu} onCancel={onCancel} />
       <NavBlock {...rest}>
         {!home && (
-        <Link to="/">
-          <div className="icon-container">
-            <HomeIcon fill="#55119e" />
-          </div>
-        </Link>)}
+          <Link to="/">
+            <div className="icon-container">
+              <HomeIcon fill="#55119e" />
+            </div>
+          </Link>
+        )}
         {home && (
           <div className="icon-container" onClick={onMenuClick}>
             <MenuIcon fill="#55119e" />
@@ -116,7 +119,7 @@ function Navbar({ text, audioPlaying, timerPlaying, home, ...rest }) {
         )}
         {timerPlaying && (
           <div className="icon-container timer">
-            <Timer start={timerPlaying}/>
+            <Timer start={timerPlaying} />
           </div>
         )}
         <div className="title">{text}</div>

@@ -16,7 +16,7 @@ function Learn1() {
   return (
     <>
       <Navbar color="transparent" />
-      <Container top="70px">
+      <Container top="80px">
         <img
           src={learn_info}
           alt="learn_info"
