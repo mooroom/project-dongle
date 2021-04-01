@@ -8,6 +8,7 @@ import guide_leg from "../asset/img/guide_leg.png";
 import guide_test from "../asset/img/guide_test.png";
 
 import { ReactComponent as SoundIcon } from "../asset/img/icon_sound.svg";
+import { ReactComponent as PlayIcon } from "../asset/img/icon_play.svg";
 import { ReactComponent as ClearIcon } from "../asset/img/icon_clear.svg";
 
 // sounds
@@ -99,7 +100,7 @@ const SoundBtn = styled.div`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  background: #e3e3e3;
+  background: #55119E;
   padding: 10px;
   & > * {
     width: 100%;
@@ -171,9 +172,9 @@ function Guide({ visible, step, onCancel }) {
       </div>
       <SoundBtn onClick={onClick} playing={playing}>
         {end ? (
-          <ClearIcon fill="#333333" />
+          <ClearIcon fill="#ffffff" />
         ) : (
-          <SoundIcon fill={playing ? "#333333" : "#aaaaaa"} />
+          <PlayIcon fill={playing ? "#ffffff" : "#909090"} />
         )}
       </SoundBtn>
     </DarkBackground>

@@ -10,8 +10,10 @@ import Counter from "../components/Counter";
 import Guide from "../components/Guide";
 import Loader from "../components/Loader";
 
+import {ReactComponent as CameraIcon} from '../asset/img/icon_camera.svg'
+
 const CamButton = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 30px;
   cursor: pointer;
   width: 50px;
@@ -22,6 +24,12 @@ const CamButton = styled.div`
   justify-content: center;
   box-sizing: border-box;
   background: #e3e3e3;
+  padding: 10px;
+
+  & > * {
+    width: 100%;
+    height: 100%;
+  }
 
   ${(props) =>
     (props.isLoading || props.testMode) &&
@@ -61,7 +69,9 @@ function Create(props) {
       <Guide visible={guide} step={step} onCancel={onCancel} />
       <Navbar text="동글이 키우는 법" timerPlaying={test} />
       <Counter count={count} />
-      <CamButton onClick={onClick} isLoading={load} testMode={test} />
+      <CamButton onClick={onClick} isLoading={load} testMode={test}>
+        <CameraIcon fill="#333333"/>
+      </CamButton>
       <Loader
         visible={load}
         step={step}
