@@ -15,20 +15,21 @@ import Alert from "../components/Alert";
 function Learn2(props) {
   const [ended, setEnded] = useState(false);
   const [show, setShow] = useState(false);
-  const [link, setLink] = useState("#");
+  const [link, setLink] = useState("/prepare");
 
+  //[2021.04.01] for the test, link hadling logics are deactivated
   const linkHandler = () => {
-    if (!ended) {
-      setShow(true);
-      setTimeout(() => setShow(false), 500);
-    }
+    // if (!ended) {
+    //   setShow(true);
+    //   setTimeout(() => setShow(false), 500);
+    // }
   };
 
-  useEffect(() => {
-    if (ended) {
-      setLink("/prepare");
-    }
-  }, [ended]);
+  // useEffect(() => {
+  //   if (ended) {
+  //     setLink("/prepare");
+  //   }
+  // }, [ended]);
 
   return (
     <>
@@ -42,8 +43,7 @@ function Learn2(props) {
               playerVars: { showinfo: 1 },
             },
           }}
-          width="100%"
-          height="auto"
+          width="100vw"
           onEnded={() => setEnded(true)}
           controls
         />
