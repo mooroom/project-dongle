@@ -58,6 +58,9 @@ function useInterval(callback, delay) {
 function Camera({ testMode }) {
   const videoRef = useRef();
   const [result, setResult] = useState([]);
+  const [msg, setMsg] = useState("이건 잘 모르겠어");
+
+  const msgType = ["이건 잘 모르겠어", "이건 얼굴이야!", "이건 팔이야!", "이건 다리야!"];
 
   useEffect(() => {
     classifier = ml5.imageClassifier("./model/model.json", () => {
@@ -70,6 +73,23 @@ function Camera({ testMode }) {
         });
     });
   }, []);
+
+  useEffect(() => {
+    if (testMode && result) {
+      switch(result[0].label.split(",")[0]) {
+        case "face":
+          setMsg(msgType[1]);
+        case "arm":
+          setMsg(msgType[2]);
+        case "leg":
+          setMsg(msgType[3]);
+        case "unknown":
+          setMsg(msgType[0]);
+        default:
+          setMsg(msgType[0]);
+      }
+    }
+  }, [result])
 
   useInterval(() => {
     if (classifier) {
@@ -87,7 +107,7 @@ function Camera({ testMode }) {
     <CameraBlock>
       <video className="videoFeed" ref={videoRef} playsInline/>
       {testMode && (
-        <div className="result">{result[0].label.split(",")[0]}</div>
+        <div className="result">{msg}</div>
       )}
     </CameraBlock>
   );

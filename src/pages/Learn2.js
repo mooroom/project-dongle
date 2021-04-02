@@ -45,7 +45,7 @@ function Learn2(props) {
           }}
           width="100vw"
           onEnded={() => setEnded(true)}
-          controls
+          autoPlay
         />
       </Container>
       <BottomBox>

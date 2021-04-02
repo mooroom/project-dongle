@@ -100,21 +100,23 @@ const SoundBtn = styled.div`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  background: #55119E;
+  background: #FFEA00;
   padding: 10px;
   & > * {
     width: 100%;
     height: 100%;
   }
 
+  animation-name: ${playing};
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
 
   ${(props) =>
-    props.playing &&
+    props.end &&
     css`
-      animation-name: ${playing};
+      background: #ffffff;
+      animation: none;
     `}
 `;
 
@@ -170,11 +172,11 @@ function Guide({ visible, step, onCancel }) {
       <div className="imgContainer">
         <img src={img} alt="guide_img" />
       </div>
-      <SoundBtn onClick={onClick} playing={playing}>
+      <SoundBtn onClick={onClick} end={end}>
         {end ? (
-          <ClearIcon fill="#ffffff" />
+          <ClearIcon fill="#404040" />
         ) : (
-          <PlayIcon fill={playing ? "#ffffff" : "#909090"} />
+          <PlayIcon fill={playing ? "#55119E" : "#909090"} />
         )}
       </SoundBtn>
     </DarkBackground>

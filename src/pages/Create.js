@@ -23,7 +23,7 @@ const CamButton = styled.div`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  background: #e3e3e3;
+  background: #ffffff;
   padding: 10px;
 
   & > * {
