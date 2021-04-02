@@ -19,12 +19,13 @@ import GameDance from "./pages/GameDance";
 import GameVirus from "./pages/GameVirus";
 
 function App() {
-  // const appHeight = () => {
-  //   const doc = document.documentElement;
-  //   doc.style.setProperty("--app-height", `${window.innerHeight}px`);
-  // };
-  // window.addEventListener("resize", appHeight);
-  // appHeight();
+  const appHeight = () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
+  };
+  appHeight();
+  window.addEventListener("resize", appHeight);
+  
   return (
     <Router>
       <Route exact path="/" component={Home} />
