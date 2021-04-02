@@ -64,7 +64,7 @@ function Prepare(props) {
     <div style={{ color: "white" }}>
       <BodyBackground color="#8C63BC" />
       <Navbar color="transparent" audioPlaying={playing} />
-      <Container flex height="100%">
+      <Container flex height="100vh">
         <h2>인공지능 동글이 키우기</h2>
         <ImageClip isPlaying={playing}>
           <img src={dongle} alt="dongle" />
