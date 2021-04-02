@@ -61,15 +61,15 @@ function Prepare(props) {
   const linkHander = () => ended && "/create";
 
   return (
-    <div style={{ color: "white" }}>
+    <>
       <BodyBackground color="#8C63BC" />
       <Navbar color="transparent" audioPlaying={playing} />
       <Container flex height="100%">
-        <h2>인공지능 동글이 키우기</h2>
+        <h2 style={{color: "white"}}>인공지능 동글이 키우기</h2>
         <ImageClip isPlaying={playing}>
           <img src={dongle} alt="dongle" />
         </ImageClip>
-        <p style={{ textAlign: "center" }}>
+        <p style={{ textAlign: "center", color: "white" }}>
           인공지능 동글이에게
           <br />
           얼굴, 팔, 다리를 만들어주세요!
@@ -83,7 +83,7 @@ function Prepare(props) {
         </Link>
       </BottomBox>
       <Alert show={show} />
-    </div>
+    </>
   );
 }
 

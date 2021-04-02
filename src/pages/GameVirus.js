@@ -48,7 +48,7 @@ const ImageBlock = styled.div`
 
 function GameVirus(props) {
   return (
-    <div>
+    <>
       <BodyBackground color="#8C63BC" />
       <Navbar color="transparent" />
       <Container top="80px">
@@ -70,7 +70,7 @@ function GameVirus(props) {
           <img src={dongle_virus} alt="dongle_virus" />
         </ImageBlock>
       </Container>
-    </div>
+    </>
   );
 }
 

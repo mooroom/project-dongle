@@ -48,7 +48,7 @@ const ImageBlock = styled.div`
 
 function GameDance(props) {
   return (
-    <div>
+    <>
       <BodyBackground color="#8C63BC" />
       <Navbar color="transparent" />
       <Container top="80px">
@@ -71,7 +71,7 @@ function GameDance(props) {
           <img src={dongle_dance} alt="dongle_dance" />
         </ImageBlock>
       </Container>
-    </div>
+    </>
   );
 }
 

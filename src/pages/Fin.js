@@ -59,7 +59,7 @@ const IconBlock = styled.div`
 
 function Fin(props) {
   return (
-    <Container flex background="#55129E" height="100vh">
+    <Container flex background="#55129E" height="100%">
       <ItemBlock>
         <Link to="/learn1">
           <IconBlock color="white">

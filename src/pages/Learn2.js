@@ -35,7 +35,7 @@ function Learn2(props) {
     <>
       <BodyBackground color="black" />
       <Navbar color="transparent" />
-      <Container flex height="100vh">
+      <Container flex height="100%">
         <ReactPlayer
           url="https://www.youtube.com/embed/h0Ls3unm-nA"
           config={{

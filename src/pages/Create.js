@@ -64,7 +64,7 @@ function Create(props) {
   }, [count]);
 
   return (
-    <Container flex height="100vh">
+    <Container flex height="100%">
       <Camera testMode={test} />
       <Guide visible={guide} step={step} onCancel={onCancel} />
       <Navbar text="동글이 키우는 법" timerPlaying={test} />
