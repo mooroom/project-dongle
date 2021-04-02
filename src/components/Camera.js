@@ -76,20 +76,18 @@ function Camera({ testMode }) {
 
   useEffect(() => {
     if (testMode && result) {
-      switch(result[0].label.split(",")[0]) {
-        case "face":
-          setMsg(msgType[1]);
-        case "arm":
-          setMsg(msgType[2]);
-        case "leg":
-          setMsg(msgType[3]);
-        case "unknown":
-          setMsg(msgType[0]);
-        default:
-          setMsg(msgType[0]);
+      const type = result[0].label.split(",")[0]
+      if (type === "face") {
+        setMsg(msgType[1]);
+      } else if (type === "arm") {
+        setMsg(msgType[2]);
+      } else if (type === "leg") {
+        setMsg(msgType[3]);
+      } else {
+        setMsg(msgType[0]);
       }
     }
-  }, [result])
+  }, [result, msg])
 
   useInterval(() => {
     if (classifier) {

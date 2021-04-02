@@ -69,11 +69,11 @@ function Fin(props) {
         <h2>다시하기</h2>
       </ItemBlock>
       <ItemBlock>
-        <Link to="#">
+        <a target="_blank" href="https://docs.google.com/forms/d/1pi4vQ2CcJvzF0uh0lmn7ZIGdJ2yEMTHDh-FiFn2tqgA/edit">
           <IconBlock color="#FFEA00">
             <SurveyIcon fill="#55119e" />
           </IconBlock>
-        </Link>
+        </a>
         <h2>설문조사</h2>
       </ItemBlock>
       <ItemBlock>
