@@ -29,7 +29,7 @@ const YoutubeBlock = styled.div`
 function Learn2(props) {
   const [ended, setEnded] = useState(false);
   const [show, setShow] = useState(false);
-  const [link, setLink] = useState("/prepare");
+  const [link, setLink] = useState("#");
 
   //[2021.04.01] for the test, link hadling logics are deactivated
   const linkHandler = () => {
