@@ -54,7 +54,7 @@ const GifBlock = styled.div`
 `;
 
 const LoaderButton = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 30px;
   width: 50px;
   height: 50px;
