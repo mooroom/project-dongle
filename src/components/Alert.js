@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // packages
 import styled, { css } from "styled-components";
@@ -14,9 +14,9 @@ const AlertBlock = styled.div`
   box-sizing: border-box;
   visibility: hidden;
   opacity: 0;
-  transition: all 0.5s ease-in;
+  transition: all 1.5s cubic-bezier(0.19, 0.58, 0.61 , 0.92);
   ${(props) =>
-    props.show &&
+    props.visible &&
     css`
       visibility: visible;
       opacity: 1;
@@ -35,8 +35,17 @@ const AlertModal = styled.div`
 `;
 
 function Alert({ text, show }) {
+  const [visible, setVisible] = useState(show);
+
+  useEffect(() => {
+    if(show) {
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  })
   return (
-    <AlertBlock show={show}>
+    <AlertBlock visible={visible}>
       <AlertModal>{text}</AlertModal>
     </AlertBlock>
   );

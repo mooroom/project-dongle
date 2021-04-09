@@ -35,7 +35,7 @@ function Learn2(props) {
   const linkHandler = () => {
     if (!ended) {
       setShow(true);
-      setTimeout(() => setShow(false), 500);
+      setTimeout(() => setShow(false), 1500);
     }
   };
 

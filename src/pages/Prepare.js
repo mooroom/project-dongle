@@ -54,7 +54,7 @@ function Prepare(props) {
     }
     if (playing && !ended) {
       setShow(true);
-      setTimeout(() => setShow(false), 500);
+      setTimeout(() => setShow(false), 1500);
     }
   };
 
