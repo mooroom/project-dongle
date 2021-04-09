@@ -18,7 +18,6 @@ const YoutubeBlock = styled.div`
   height: 100vh;
   width: 100vw;
   position: fixed;
-  z-index: 998;
   top: 0;
   left: 0;
   display: flex;
@@ -47,9 +46,6 @@ function Learn2(props) {
 
   const opts = {
     width: '100%',
-    playerVars: {
-      // controls: 0
-    }
   }
 
   return (
