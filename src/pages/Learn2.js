@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 // packages
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
+import YouTube from 'react-youtube';
+import styled from 'styled-components';
 
 // components
 import Navbar from "../components/Navbar";
@@ -12,42 +14,47 @@ import Container from "../components/Container";
 import BottomBox from "../components/BottomBox";
 import Alert from "../components/Alert";
 
+const YoutubeBlock = styled.div`
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 function Learn2(props) {
   const [ended, setEnded] = useState(false);
   const [show, setShow] = useState(false);
-  const [link, setLink] = useState("/prepare");
+  const [link, setLink] = useState("#");
 
   //[2021.04.01] for the test, link hadling logics are deactivated
   const linkHandler = () => {
-    // if (!ended) {
-    //   setShow(true);
-    //   setTimeout(() => setShow(false), 500);
-    // }
+    if (!ended) {
+      setShow(true);
+      setTimeout(() => setShow(false), 500);
+    }
   };
 
-  // useEffect(() => {
-  //   if (ended) {
-  //     setLink("/prepare");
-  //   }
-  // }, [ended]);
+  useEffect(() => {
+    if (ended) {
+      setLink("/prepare");
+    }
+  }, [ended]);
+
+  const opts = {
+    width: '100%',
+  }
 
   return (
     <>
       <BodyBackground color="black" />
       <Navbar color="transparent" />
-      <Container flex height="100%">
-        <ReactPlayer
-          url="https://www.youtube.com/embed/h0Ls3unm-nA"
-          config={{
-            youtube: {
-              playerVars: { showinfo: 1 },
-            },
-          }}
-          width="100vw"
-          onEnded={() => setEnded(true)}
-          autoPlay
-        />
-      </Container>
+      <YoutubeBlock>
+        <YouTube videoId="h0Ls3unm-nA" opts={opts} onEnd={() => setEnded(true)}  />
+      </YoutubeBlock>
       <BottomBox>
         <Link to={link}>
           <Button width="100%" onClick={linkHandler}>

@@ -12,11 +12,13 @@ const AlertBlock = styled.div`
   transform: translate(-50%, -50%);
   padding: 0 40px;
   box-sizing: border-box;
+  visibility: hidden;
   opacity: 0;
   transition: all 0.5s ease-in;
   ${(props) =>
     props.show &&
     css`
+      visibility: visible;
       opacity: 1;
     `}
 `;
