@@ -22,6 +22,7 @@ const BottomBoxBlock = styled.div`
   box-sizing: border-box;
   width: 100%;
   position: fixed;
+  z-index: 997;
   left: 0;
   bottom: 0;
 
