@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 // packages
 import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
-import YouTube from 'react-youtube';
-import styled from 'styled-components';
+import YouTube from "react-youtube";
+import styled from "styled-components";
 
 // components
 import Navbar from "../components/Navbar";
@@ -24,19 +24,19 @@ const YoutubeBlock = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 function Learn2(props) {
   const [ended, setEnded] = useState(false);
   const [show, setShow] = useState(false);
-  const [link, setLink] = useState("#");
+  const [link, setLink] = useState("/prepare");
 
   //[2021.04.01] for the test, link hadling logics are deactivated
   const linkHandler = () => {
-    if (!ended) {
-      setShow(true);
-      setTimeout(() => setShow(false), 1500);
-    }
+    // if (!ended) {
+    //   setShow(true);
+    //   setTimeout(() => setShow(false), 1500);
+    // }
   };
 
   useEffect(() => {
@@ -46,15 +46,19 @@ function Learn2(props) {
   }, [ended]);
 
   const opts = {
-    width: '100%',
-  }
+    width: "100%",
+  };
 
   return (
     <>
       <BodyBackground color="black" />
       <Navbar color="transparent" />
       <YoutubeBlock>
-        <YouTube videoId="h0Ls3unm-nA" opts={opts} onEnd={() => setEnded(true)}  />
+        <YouTube
+          videoId="h0Ls3unm-nA"
+          opts={opts}
+          onEnd={() => setEnded(true)}
+        />
       </YoutubeBlock>
       <BottomBox>
         <Link to={link}>
