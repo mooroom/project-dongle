@@ -13,17 +13,16 @@ import Button from "../components/Button";
 import Container from "../components/Container";
 import BottomBox from "../components/BottomBox";
 import Alert from "../components/Alert";
+import YoutubeEmbed from "../components/YoutubeEmbed";
+import { findByLabelText } from "@testing-library/dom";
 
-const YoutubeBlock = styled.div`
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  z-index: 997;
-  top: 0;
-  left: 0;
+const VideoStyle = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: column;
 `;
 
 function Learn2(props) {
@@ -53,13 +52,10 @@ function Learn2(props) {
     <>
       <BodyBackground color="black" />
       <Navbar color="transparent" />
-      <YoutubeBlock>
-        <YouTube
-          videoId="h0Ls3unm-nA"
-          opts={opts}
-          onEnd={() => setEnded(true)}
-        />
-      </YoutubeBlock>
+      <VideoStyle>
+        <YoutubeEmbed embedId="h0Ls3unm-nA" />
+      </VideoStyle>
+
       <BottomBox>
         <Link to={link}>
           <Button width="100%" onClick={linkHandler}>
