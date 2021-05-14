@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import YouTube from "react-youtube";
 
 const YoutubeBlock = styled.div`
   overflow: hidden;
@@ -16,10 +17,16 @@ const YoutubeBlock = styled.div`
   }
 `;
 
-function YoutubeEmbed({ embedId }) {
+function YoutubeEmbed({ embedId, setEnded }) {
+  const opts = {
+    height: "853",
+    width: "480",
+    playerVars: {},
+  };
+
   return (
     <YoutubeBlock>
-      <iframe
+      {/* <iframe
         width="853"
         height="480"
         src={`https://www.youtube.com/embed/${embedId}`}
@@ -27,7 +34,8 @@ function YoutubeEmbed({ embedId }) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         title="Embeded youtube"
-      />
+      /> */}
+      <YouTube videoId={embedId} onEnd={() => setEnded(true)} />
     </YoutubeBlock>
   );
 }

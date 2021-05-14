@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 
 // packages
 import { Link } from "react-router-dom";
-import ReactPlayer from "react-player";
-import YouTube from "react-youtube";
 import styled from "styled-components";
 
 // components
@@ -28,14 +26,15 @@ const VideoStyle = styled.div`
 function Learn2(props) {
   const [ended, setEnded] = useState(false);
   const [show, setShow] = useState(false);
-  const [link, setLink] = useState("/prepare");
+  const [link, setLink] = useState("#");
 
   //[2021.04.01] for the test, link hadling logics are deactivated
   const linkHandler = () => {
-    // if (!ended) {
-    //   setShow(true);
-    //   setTimeout(() => setShow(false), 1500);
-    // }
+    console.log("click!!!!");
+    if (!ended) {
+      setShow(true);
+      setTimeout(() => setShow(false), 1500);
+    }
   };
 
   useEffect(() => {
@@ -53,7 +52,7 @@ function Learn2(props) {
       <BodyBackground color="black" />
       <Navbar color="transparent" />
       <VideoStyle>
-        <YoutubeEmbed embedId="h0Ls3unm-nA" />
+        <YoutubeEmbed embedId="h0Ls3unm-nA" setEnded={setEnded} />
       </VideoStyle>
 
       <BottomBox>
