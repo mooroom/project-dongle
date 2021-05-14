@@ -65,9 +65,14 @@ function GameDance(props) {
           </p>
         </TextBlock>
         <ImageBlock>
-          <div className="download">
-            <DownloadIcon fill="white" />
-          </div>
+          <a
+            href="https://drive.google.com/drive/folders/1m-J1Zu8fenSKwNVgO0tRnc-A3gpfTiBI"
+            target="_blank"
+          >
+            <div className="download">
+              <DownloadIcon fill="white" />
+            </div>
+          </a>
           <img src={dongle_dance} alt="dongle_dance" />
         </ImageBlock>
       </Container>

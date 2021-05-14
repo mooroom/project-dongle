@@ -10,6 +10,7 @@ import Container from "../components/Container";
 import dongle_virus from "../asset/img/dongle_virus.png";
 
 import { ReactComponent as DownloadIcon } from "../asset/img/icon_download.svg";
+import { Link } from "react-router-dom";
 
 const TextBlock = styled.div`
   color: white;
@@ -64,9 +65,14 @@ function GameVirus(props) {
           </p>
         </TextBlock>
         <ImageBlock>
-          <div className="download">
-            <DownloadIcon fill="white" />
-          </div>
+          <a
+            href="https://drive.google.com/drive/folders/1I_r85_6Gd5G5s9ZjG5NE82v0U8yKA9Fa"
+            target="_blank"
+          >
+            <div className="download">
+              <DownloadIcon fill="white" />
+            </div>
+          </a>
           <img src={dongle_virus} alt="dongle_virus" />
         </ImageBlock>
       </Container>
