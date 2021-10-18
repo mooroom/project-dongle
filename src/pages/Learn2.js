@@ -26,7 +26,7 @@ const VideoStyle = styled.div`
 `;
 
 function Learn2(props) {
-  const [ended, setEnded] = useState(false);
+  const [ended, setEnded] = useState(true);
   const [show, setShow] = useState(false);
   const [link, setLink] = useState("#");
 
