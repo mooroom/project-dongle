@@ -13,13 +13,15 @@ import BottomBox from "../components/BottomBox";
 import Alert from "../components/Alert";
 import YoutubeEmbed from "../components/YoutubeEmbed";
 import { findByLabelText } from "@testing-library/dom";
+import guideImg from "../asset/img/learn2Guide.png";
 
 const VideoStyle = styled.div`
   position: relative;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
 `;
 
@@ -48,11 +50,12 @@ function Learn2(props) {
   };
 
   return (
-    <>
+    <div style={{ paddingTop: "50px", paddingBottom: "100px" }}>
       <BodyBackground color="black" />
       <Navbar color="transparent" />
       <VideoStyle>
-        <YoutubeEmbed embedId="h0Ls3unm-nA" setEnded={setEnded} />
+        {/* <YoutubeEmbed embedId="h0Ls3unm-nA" setEnded={setEnded} /> */}
+        <img src={guideImg} width="90%" alt="img" />
       </VideoStyle>
 
       <BottomBox>
@@ -66,7 +69,7 @@ function Learn2(props) {
         text="동영상을 모두 보고 난 후 다음 페이지로 갈 수 있어!"
         show={show}
       />
-    </>
+    </div>
   );
 }
 
