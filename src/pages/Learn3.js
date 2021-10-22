@@ -31,7 +31,7 @@ function Learn3() {
         </TextBlock>
         <img src={cartoon} alt="learn_info" style={{ width: "100%" }} />
         <BottomBox nonfix>
-          <Link to="/fin">
+          <Link to="/">
             <Button width="100%">다음으로 넘어가기</Button>
           </Link>
         </BottomBox>
