@@ -21,7 +21,7 @@ function Timer({ start }) {
 
   return (
     <>
-      {fin && <Redirect to="/learn3" />}
+      {fin && <Redirect to="/" />}
       <div
         style={{
           display: "flex",
