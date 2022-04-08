@@ -28,11 +28,11 @@ function App() {
 
   return (
     <Router>
-      {/* <Route exact path="/" component={Home} /> */}
+      <Route exact path="/" component={Home} />
       <Route path="/learn1" component={Learn1} />
       <Route path="/learn2" component={Learn2} />
       <Route path="/prepare" component={Prepare} />
-      <Route path="/" component={Create} />
+      <Route path="/create" component={Create} />
       <Route path="/test" component={Test} />
       <Route path="/learn3" component={Learn3} />
       <Route path="/fin" component={Fin} />
